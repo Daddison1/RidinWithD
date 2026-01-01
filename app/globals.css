@@ -5,8 +5,32 @@
   --muted: #B8B2AA;
   --border: #2A2A2A;
   --accent: #FFD400;
-  --accent-warm: #9C6B3F;
+  --accentWarm: #9C6B3F;
 }
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+}
+.surface {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.btnPrimary {
+  background: var(--accent);
+  color: #000;
+  font-weight: 700;
+  border-radius: 12px;
+  padding: 10px 14px;
+}
+
+.btnPrimary:hover { opacity: 0.9; }
+
+.linkAccent { color: var(--accent); }
+.linkAccent:hover { text-decoration: underline; }
+
 
 @import "tailwindcss";
 
