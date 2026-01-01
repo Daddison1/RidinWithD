@@ -168,4 +168,106 @@ export default function HomePage() {
             className="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-white"
             value={driveType}
             onChange={(e) => setDriveType(e.target.value as any)}
-            disabled={tab ===
+            disabled={tab === "Gear"}
+          >
+            <option value="All">All</option>
+            <option value="Mid-Drive">Mid-Drive</option>
+            <option value="Hub Motor">Hub Motor</option>
+            <option value="Unknown">Unknown</option>
+          </select>
+        </div>
+
+        <div className={tab !== "Gear" ? "hidden md:block" : ""}>
+          <label className="text-sm font-medium text-white/80">
+            Gear Category
+          </label>
+          <select
+            className="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-white"
+            value={gearCategory}
+            onChange={(e) => setGearCategory(e.target.value as any)}
+            disabled={tab !== "Gear"}
+          >
+            <option value="All">All</option>
+            <option value="Helmet">Helmet</option>
+            <option value="Boots">Boots</option>
+            <option value="Pants">Pants</option>
+            <option value="Gloves">Gloves</option>
+            <option value="Protection">Protection</option>
+            <option value="Jersey">Jersey</option>
+            <option value="Goggles">Goggles</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div>
+          <label className="text-sm font-medium text-white/80">
+            Sort
+          </label>
+          <select
+            className="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-white"
+            value={sort}
+            onChange={(e) => setSort(e.target.value as Sort)}
+          >
+            <option value="best">Best deals</option>
+            <option value="newest">Newest</option>
+            <option value="priceLow">Price: low → high</option>
+            <option value="priceHigh">Price: high → low</option>
+          </select>
+        </div>
+
+        <div className="md:col-span-4">
+          <label className="text-sm font-medium text-white/80">
+            Search
+          </label>
+          <input
+            className="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-white"
+            placeholder={
+              tab === "Gear"
+                ? "Try: boots, helmet, gloves…"
+                : "Try: mid-drive, hub, brand…"
+            }
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+        </div>
+      </div>
+
+      {base.length === 0 ? (
+        <div className="mt-8 rounded-2xl border border-white/10 bg-white/5 p-6 text-white/70">
+          No results for that tab / region / filter.
+        </div>
+      ) : (
+        <>
+          <Section
+            title={
+              tab === "Electric Dirt Bikes"
+                ? "Budget-Friendly Electric Dirt Bikes"
+                : tab === "E-Bikes"
+                ? "Budget-Friendly E-Bikes"
+                : "Budget Gear Deals"
+            }
+            subtitle={
+              tab === "Electric Dirt Bikes"
+                ? "Cheaper entry options + mini e-motos."
+                : tab === "E-Bikes"
+                ? "Often hub-motor value buys."
+                : "Affordable essentials (sales + closeouts)."
+            }
+            deals={budget}
+          />
+          <Section
+            title="Mid-Range Picks"
+            subtitle="Good performance per dollar."
+            deals={mid}
+          />
+          <Section
+            title="Premium / High-Performance"
+            subtitle="Top-tier builds and best spec."
+            deals={premium}
+          />
+        </>
+      )}
+    </div>
+  );
+}
+
