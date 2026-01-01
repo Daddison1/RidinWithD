@@ -1,3 +1,13 @@
+:root {
+  --bg: #0E0E0E;
+  --surface: #1A1A1A;
+  --text: #F5F5F5;
+  --muted: #B8B2AA;
+  --border: #2A2A2A;
+  --accent: #FFD400;
+  --accent-warm: #9C6B3F;
+}
+
 @import "tailwindcss";
 
 :root {
