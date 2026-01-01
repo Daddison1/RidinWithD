@@ -15,9 +15,9 @@ export default function DealCard({ deal }: { deal: Deal }) {
       href={deal.url}
       target="_blank"
       rel="noreferrer"
-      className="group overflow-hidden rounded-2xl border bg-white shadow-sm transition hover:shadow-md"
+      className="group overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-sm backdrop-blur transition hover:-translate-y-0.5 hover:border-white/20 hover:shadow-md"
     >
-      <div className="aspect-[16/9] w-full bg-neutral-100">
+      <div className="aspect-[16/9] w-full bg-white/5">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={
@@ -32,38 +32,46 @@ export default function DealCard({ deal }: { deal: Deal }) {
       <div className="p-4">
         <div className="flex items-start justify-between gap-3">
           <div>
-            <div className="text-xs text-neutral-500">
+            <div className="text-xs text-white/60">
               {deal.retailer} • {deal.region} • {deal.kind}
               {deal.driveType ? ` • ${deal.driveType}` : ""}
               {deal.gearCategory ? ` • ${deal.gearCategory}` : ""}
             </div>
-            <h3 className="mt-1 line-clamp-2 font-semibold">{deal.title}</h3>
+            <h3 className="mt-1 line-clamp-2 font-semibold text-white">
+              {deal.title}
+            </h3>
           </div>
 
           {discount !== null && (
-            <div className="shrink-0 rounded-xl bg-emerald-50 px-2 py-1 text-xs font-semibold text-emerald-700">
+            <div className="shrink-0 rounded-xl bg-[#ffd400] px-2 py-1 text-xs font-extrabold text-black">
               -{discount}%
             </div>
           )}
         </div>
 
         <div className="mt-3 flex items-baseline gap-2">
-          <div className="text-lg font-bold">{formatMoney(deal.price)}</div>
+          <div className="text-lg font-bold text-white">
+            {formatMoney(deal.price)}
+          </div>
+
           {deal.wasPrice ? (
-            <div className="text-sm text-neutral-500 line-through">{formatMoney(deal.wasPrice)}</div>
+            <div className="text-sm text-white/50 line-through">
+              {formatMoney(deal.wasPrice)}
+            </div>
           ) : null}
-          <div className="ml-auto rounded-xl bg-neutral-100 px-2 py-1 text-xs font-semibold text-neutral-700">
+
+          <div className="ml-auto rounded-xl bg-white/10 px-2 py-1 text-xs font-semibold text-white/80">
             {deal.tier}
           </div>
         </div>
 
-        <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-neutral-700">
+        <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-white/75">
           {deal.highlights.slice(0, 3).map((h) => (
             <li key={h}>{h}</li>
           ))}
         </ul>
 
-        <div className="mt-4 text-xs text-neutral-500">
+        <div className="mt-4 text-xs text-white/50">
           Updated {new Date(deal.lastUpdatedISO).toLocaleDateString()}
         </div>
       </div>
