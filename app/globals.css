@@ -1,17 +1,34 @@
+@import "tailwindcss";
+
+/* Ridin With D Brand Theme */
 :root {
-  --bg: #0E0E0E;
-  --surface: #1A1A1A;
-  --text: #F5F5F5;
-  --muted: #B8B2AA;
-  --border: #2A2A2A;
-  --accent: #FFD400;
-  --accentWarm: #9C6B3F;
+  --bg: #0e0e0e;
+  --surface: #1a1a1a;
+  --text: #f5f5f5;
+  --muted: #b8b2aa;
+  --border: #2a2a2a;
+  --accent: #ffd400;
+  --warm: #9c6b3f;
 }
 
-html, body {
+html,
+body {
   background: var(--bg);
   color: var(--text);
 }
+
+/* Nice text rendering */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Optional: set a default font if you want */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Reusable helper classes */
 .surface {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -21,37 +38,23 @@ html, body {
 .btnPrimary {
   background: var(--accent);
   color: #000;
-  font-weight: 700;
+  font-weight: 800;
   border-radius: 12px;
   padding: 10px 14px;
 }
 
-.btnPrimary:hover { opacity: 0.9; }
-
-.linkAccent { color: var(--accent); }
-.linkAccent:hover { text-decoration: underline; }
-
-
-@import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+.btnPrimary:hover {
+  opacity: 0.9;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.linkAccent {
+  color: var(--accent);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.linkAccent:hover {
+  text-decoration: underline;
 }
+
 
 body {
   background: var(--background);
