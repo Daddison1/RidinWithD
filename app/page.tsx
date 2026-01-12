@@ -50,18 +50,18 @@ function Section({
   if (deals.length === 0) return null;
 
   return (
-    <section className="mt-12">
+    <section className="mt-14">
       <div className="flex items-end justify-between gap-4">
         <div>
           <h2 className="text-lg font-semibold text-white">{title}</h2>
-          {subtitle ? (
+          {subtitle && (
             <div className="mt-1 text-sm text-white/60">{subtitle}</div>
-          ) : null}
+          )}
         </div>
         <div className="text-sm text-white/50">{deals.length} found</div>
       </div>
 
-      <div className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {deals.map((d) => (
           <DealCard key={d.id} deal={d} />
         ))}
@@ -118,22 +118,50 @@ export default function HomePage() {
 
   return (
     <div>
-      {/* ================= HERO SECTION ================= */}
-      <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/10 to-white/5 p-6 md:p-8">
-        <div className="max-w-3xl">
-          <h1 className="text-3xl font-extrabold tracking-tight text-white md:text-4xl">
+      {/* ================= HERO ================= */}
+      <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-[var(--surface)] p-6 md:p-10">
+        {/* glow */}
+        <div className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-[var(--accent)]/25 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-black/20" />
+
+        {/* accent bar */}
+        <div className="absolute left-0 top-0 h-full w-1.5 bg-[var(--accent)]" />
+
+        <div className="relative max-w-3xl">
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/30 px-3 py-1 text-xs font-semibold text-white/80">
+            <span className="h-2 w-2 rounded-full bg-[var(--accent)]" />
+            Updated often • Real deals
+          </span>
+
+          <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-white md:text-5xl">
             Best Dirt Bike & E-Bike Deals
           </h1>
 
-          <p className="mt-3 text-base text-white/75">
+          <p className="mt-4 text-lg text-white/75">
             Curated deals on <b>electric dirt bikes</b>, <b>e-bikes</b>, and
-            essential riding gear — hand-picked the same way I review bikes on
-            the channel.
+            essential riding gear — picked the same way I review bikes on the
+            channel.
           </p>
+
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <a
+              href="#results"
+              className="rounded-xl bg-[var(--accent)] px-6 py-3 text-sm font-extrabold text-black hover:opacity-90"
+            >
+              Browse Deals ↓
+            </a>
+            <a
+              href="/alerts"
+              className="rounded-xl border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white/85 hover:bg-white/10"
+            >
+              Get Email Alerts
+            </a>
+          </div>
         </div>
 
         {/* Tabs */}
-        <div className="mt-6 flex flex-wrap gap-2">
+        <div className="relative mt-8 flex flex-wrap gap-2">
           {(["Electric Dirt Bikes", "E-Bikes", "Gear"] as Tab[]).map((t) => (
             <button
               key={t}
@@ -237,6 +265,8 @@ export default function HomePage() {
       </div>
 
       {/* ================= RESULTS ================= */}
+      <div id="results" />
+
       {base.length === 0 ? (
         <div className="mt-10 rounded-2xl border border-white/10 bg-white/5 p-6 text-white/70">
           No results for that tab / region / filter.
@@ -277,3 +307,4 @@ export default function HomePage() {
     </div>
   );
 }
+
