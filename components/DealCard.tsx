@@ -9,6 +9,13 @@ function formatMoney(n: number) {
 const FALLBACK_IMAGE =
   "https://images.unsplash.com/photo-1558981033-64b0f4f5f41e?auto=format&fit=crop&w=1200&q=60";
 
+function proxied(src?: string) {
+  const s = src?.trim();
+  if (!s) return FALLBACK_IMAGE;
+  if (s.startsWith("/")) return s; // local image, don't proxy
+  return `/api/img?u=${encodeURIComponent(s)}`;
+}
+
 export default function DealCard({ deal }: { deal: Deal }) {
   const discount =
     deal.wasPrice && deal.wasPrice > deal.price
@@ -25,12 +32,12 @@ export default function DealCard({ deal }: { deal: Deal }) {
       <div className="aspect-[16/9] w-full overflow-hidden bg-white/5">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={deal.imageUrl ?? FALLBACK_IMAGE}
+          src={proxied(deal.imageUrl)}
           alt={deal.title}
           loading="lazy"
-          referrerPolicy="no-referrer"
           onError={(e) => {
             const img = e.currentTarget;
+            // If proxy fails, fall back
             if (img.src !== FALLBACK_IMAGE) img.src = FALLBACK_IMAGE;
           }}
           className="h-full w-full object-cover transition group-hover:scale-[1.02]"
