@@ -20,12 +20,19 @@ export type Deal = {
   brand: string;
   retailer: string;
   region: Region;
+
   kind: DealKind;
+
+  // Bike/Ebike only
   driveType?: DriveType;
+
+  // Gear only
   gearCategory?: GearCategory;
+
   price: number;
   wasPrice?: number;
   tier: PriceTier;
+
   url: string;
   imageUrl?: string;
   highlights: string[];
@@ -42,149 +49,139 @@ export const REGIONS: { code: Region; label: string }[] = [
 ];
 
 export const SAMPLE_DEALS: Deal[] = [
-  // =======================
-  // BUDGET / YOUTH E-DIRT
-  // =======================
+  // =========================
+  // ELECTRIC DIRT BIKES
+  // =========================
+
   {
-    id: "hiboy-dk1",
-    title: "Hiboy DK1 Electric Dirt Bike (Youth)",
-    brand: "Hiboy",
-    retailer: "Hiboy",
+    id: "bike-qronge-x1-spark",
+    title: "Qronge X1 Spark — 4500W mid-drive electric dirt bike",
+    brand: "Qronge",
+    retailer: "Qronge",
     region: "US",
     kind: "Bike",
-    driveType: "Hub Motor",
-    price: 359,
-    wasPrice: 499,
+    driveType: "Mid-Drive",
+    price: 1149.99,
+    wasPrice: 2199.99,
     tier: "Budget",
-    url: "https://www.hiboy.com/products/hiboy-dk1-electric-dirt-bike-for-kids-ages-3-13",
-    imageUrl: "https://www.hiboy.com/cdn/shop/files/DK04.jpg",
+    url: "https://www.qronge.com/products/x1-spark",
+    imageUrl:
+      "https://www.qronge.com/cdn/shop/files/1_e1ea7378-5c89-4686-a641-948daf278d44.jpg?v=1767000664&width=1200",
     highlights: [
-      "300W hub motor",
-      "3 speed modes (kid friendly)",
-      "Great starter electric dirt bike",
+      "4500W peak power (mid-drive)",
+      "60V battery listed",
+      "Off-road / throttle-only style",
     ],
     lastUpdatedISO: new Date().toISOString(),
   },
+
   {
-    id: "razor-mx650",
-    title: "Razor MX650 Dirt Rocket",
+    id: "bike-yozma-in10",
+    title: "Yozma IN 10 — 2600W mid-drive mini dirt bike (teens/adults)",
+    brand: "Yozma",
+    retailer: "Yozma Sport",
+    region: "US",
+    kind: "Bike",
+    driveType: "Mid-Drive",
+    price: 1259.99,
+    wasPrice: 1599.0,
+    tier: "Budget",
+    url: "https://yozmasport.com/products/in-10",
+    imageUrl:
+      "https://yozmasport.com/cdn/shop/files/Group_41_94ff018a-cd32-475e-a02a-0af0b18cfd24.png?v=1765267218&width=1600",
+    highlights: [
+      "2600W mid-drive motor",
+      "Fat tires + full suspension styling",
+      "Good size for teens / smaller adults",
+    ],
+    lastUpdatedISO: new Date().toISOString(),
+  },
+
+  {
+    id: "bike-tuttio-soleil01",
+    title: "Tuttio Soleil01 — 48V 2000W electric mini bike (kids/teens)",
+    brand: "Tuttio",
+    retailer: "TuttioSport",
+    region: "US",
+    kind: "Bike",
+    driveType: "Unknown",
+    price: 1299.0,
+    wasPrice: 1399.0,
+    tier: "Budget",
+    url: "https://tuttiosport.com/products/tuttio-soleil01-electric-bike",
+    imageUrl:
+      "https://tuttiosport.com/cdn/shop/files/adult-electric-motorcycle-2000w-cheap-dirtt-bike.jpg?v=1763629112&width=1200",
+    highlights: [
+      "48V 2000W listed",
+      "Mini-bike / pit-bike style",
+      "Good gift category (youth/teens)",
+    ],
+    lastUpdatedISO: new Date().toISOString(),
+  },
+
+  // =========================
+  // EXAMPLES / PLACEHOLDERS (you can remove these later)
+  // =========================
+
+  {
+    id: "bike-razor-mx650",
+    title: "Razor MX650 — Budget electric mini dirt bike (example)",
     brand: "Razor",
-    retailer: "Walmart",
+    retailer: "Retailer",
     region: "US",
     kind: "Bike",
-    driveType: "Hub Motor",
-    price: 549,
+    driveType: "Unknown",
+    price: 599,
+    wasPrice: 699,
     tier: "Budget",
-    url: "https://www.walmart.com/ip/554737831",
-    imageUrl: "https://i5.walmartimages.com/asr/1d2e2b2b-7a5a-4b6c-b1b6-8b0a4c1fd80a.8c3c8ef94c7a85a2d8f24e2c4c29c316.jpeg",
-    highlights: [
-      "Classic mini electric dirt bike",
-      "Chain drive",
-      "Supports riders up to 220 lbs",
-    ],
+    url: "https://example.com/razor-mx650",
+    imageUrl:
+      "https://images.unsplash.com/photo-1558981033-64b0f4f5f41e?auto=format&fit=crop&w=1200&q=60",
+    highlights: ["Great starter", "Cheap fun", "Easy to find parts"],
     lastUpdatedISO: new Date().toISOString(),
   },
 
-  // =======================
-  // MID-RANGE ELECTRIC DIRT
-  // =======================
+  // =========================
+  // EBIKES (example)
+  // =========================
+
   {
-    id: "freego-nova3",
-    title: "Freego Nova 3 Mid-Drive Electric Dirt Bike",
-    brand: "Freego",
-    retailer: "Freego Bikes",
+    id: "ebike-budget-hub",
+    title: "Fat-tire e-bike — Example budget deal",
+    brand: "ExampleBrand",
+    retailer: "Retailer",
     region: "US",
-    kind: "Bike",
-    driveType: "Mid-Drive",
-    price: 1699,
-    tier: "Mid",
-    url: "https://freegobikes.com/products/freego-nova3-mid-drive-electric-motorcycle",
-    imageUrl: "https://freegobikes.com/cdn/shop/files/Freego_Nova2_RightFrontView.png",
-    highlights: [
-      "3000W mid-drive motor",
-      "Full suspension",
-      "Budget adult electric dirt bike",
-    ],
-    lastUpdatedISO: new Date().toISOString(),
-  },
-  {
-    id: "mototec-48v-pro",
-    title: "MotoTec 48V Pro Electric Dirt Bike",
-    brand: "MotoTec",
-    retailer: "MotoTec USA",
-    region: "US",
-    kind: "Bike",
-    driveType: "Mid-Drive",
-    price: 1099,
-    tier: "Mid",
-    url: "https://mototecusa.com/products/mototec-48v-1800w-pro-electric-dirt-bike",
-    imageUrl: "https://mototecusa.com/cdn/shop/products/48v1800w_1024x1024.jpg",
-    highlights: [
-      "1800W mid-drive",
-      "30+ mph capability",
-      "Good step-up from youth bikes",
-    ],
+    kind: "Ebike",
+    driveType: "Hub Motor",
+    price: 999,
+    wasPrice: 1299,
+    tier: "Budget",
+    url: "https://example.com/budget-ebike",
+    imageUrl:
+      "https://images.unsplash.com/photo-1520975682038-6f3f04caa3c5?auto=format&fit=crop&w=1200&q=60",
+    highlights: ["Hub motor value buy", "Good for commuting", "Often discounted"],
     lastUpdatedISO: new Date().toISOString(),
   },
 
-  // =======================
-  // ADULT PERFORMANCE E-DIRT
-  // =======================
+  // =========================
+  // GEAR (example)
+  // =========================
+
   {
-    id: "talaria-sting-r",
-    title: "Talaria Sting R MX4",
-    brand: "Talaria",
-    retailer: "Talaria USA",
+    id: "gear-boots-tech3",
+    title: "Alpinestars Tech 3 Boots — Example sale",
+    brand: "Alpinestars",
+    retailer: "Moto Retailer",
     region: "US",
-    kind: "Bike",
-    driveType: "Mid-Drive",
-    price: 4099,
-    tier: "Premium",
-    url: "https://talariausa.us.com/product/talaria-sting-r-mx4/",
-    imageUrl: "https://talariausa.us.com/wp-content/uploads/2023/05/Talaria-Sting-R-MX4.jpg",
-    highlights: [
-      "8kW peak mid-drive",
-      "Gear drive (no belt)",
-      "Sur-Ron competitor",
-    ],
-    lastUpdatedISO: new Date().toISOString(),
-  },
-  {
-    id: "surron-light-bee-x",
-    title: "Sur-Ron Light Bee X",
-    brand: "Sur-Ron",
-    retailer: "Sur-Ron USA",
-    region: "US",
-    kind: "Bike",
-    driveType: "Mid-Drive",
-    price: 4600,
-    tier: "Premium",
-    url: "https://sur-ronusa.us.com/product/surron-light-bee-x/",
-    imageUrl: "https://sur-ronusa.us.com/wp-content/uploads/2022/03/light-bee-x.jpg",
-    highlights: [
-      "6kW peak mid-drive",
-      "Massive aftermarket",
-      "Most popular e-dirt bike",
-    ],
-    lastUpdatedISO: new Date().toISOString(),
-  },
-  {
-    id: "surron-ultra-bee",
-    title: "Sur-Ron Ultra Bee",
-    brand: "Sur-Ron",
-    retailer: "Sur-Ron USA",
-    region: "US",
-    kind: "Bike",
-    driveType: "Mid-Drive",
-    price: 6999,
-    tier: "Premium",
-    url: "https://sur-ronusa.us.com/product/surron-ultra-bee/",
-    imageUrl: "https://sur-ronusa.us.com/wp-content/uploads/2023/02/Ultra-Bee.jpg",
-    highlights: [
-      "12.5kW peak",
-      "Larger chassis",
-      "Closest to full-size dirt bike",
-    ],
+    kind: "Gear",
+    gearCategory: "Boots",
+    price: 239,
+    wasPrice: 299,
+    tier: "Mid",
+    url: "https://example.com/tech3",
+    imageUrl:
+      "https://images.unsplash.com/photo-1528701800489-20be3c3ea4a2?auto=format&fit=crop&w=1200&q=60",
+    highlights: ["Great protection/value", "Replaceable buckles", "Popular pick"],
     lastUpdatedISO: new Date().toISOString(),
   },
 ];
