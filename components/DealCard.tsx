@@ -1,8 +1,13 @@
+"use client";
+
 import type { Deal } from "@/lib/deals";
 
 function formatMoney(n: number) {
   return n.toLocaleString(undefined, { style: "currency", currency: "USD" });
 }
+
+const FALLBACK_IMAGE =
+  "https://images.unsplash.com/photo-1558981033-64b0f4f5f41e?auto=format&fit=crop&w=1200&q=60";
 
 export default function DealCard({ deal }: { deal: Deal }) {
   const discount =
@@ -17,14 +22,17 @@ export default function DealCard({ deal }: { deal: Deal }) {
       rel="noreferrer"
       className="group overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-sm backdrop-blur transition hover:-translate-y-0.5 hover:border-white/20 hover:shadow-md"
     >
-      <div className="aspect-[16/9] w-full bg-white/5">
+      <div className="aspect-[16/9] w-full overflow-hidden bg-white/5">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={
-            deal.imageUrl ??
-            "https://images.unsplash.com/photo-1558981033-64b0f4f5f41e?auto=format&fit=crop&w=1200&q=60"
-          }
+          src={deal.imageUrl ?? FALLBACK_IMAGE}
           alt={deal.title}
+          loading="lazy"
+          referrerPolicy="no-referrer"
+          onError={(e) => {
+            const img = e.currentTarget;
+            if (img.src !== FALLBACK_IMAGE) img.src = FALLBACK_IMAGE;
+          }}
           className="h-full w-full object-cover transition group-hover:scale-[1.02]"
         />
       </div>
@@ -43,24 +51,24 @@ export default function DealCard({ deal }: { deal: Deal }) {
           </div>
 
           {discount !== null && (
-            <div className="shrink-0 rounded-xl bg-[#ffd400] px-2 py-1 text-xs font-extrabold text-black">
+            <div className="shrink-0 rounded-xl bg-[var(--accent)] px-2 py-1 text-xs font-extrabold text-black">
               -{discount}%
             </div>
           )}
         </div>
 
         <div className="mt-3 flex items-baseline gap-2">
-          <div className="text-lg font-bold text-white">
+          <div className="text-lg font-extrabold text-white">
             {formatMoney(deal.price)}
           </div>
 
           {deal.wasPrice ? (
-            <div className="text-sm text-white/50 line-through">
+            <div className="text-sm text-white/60 line-through">
               {formatMoney(deal.wasPrice)}
             </div>
           ) : null}
 
-          <div className="ml-auto rounded-xl bg-white/10 px-2 py-1 text-xs font-semibold text-white/80">
+          <div className="ml-auto rounded-xl border border-white/10 bg-white/5 px-2 py-1 text-xs font-semibold text-white/80">
             {deal.tier}
           </div>
         </div>
