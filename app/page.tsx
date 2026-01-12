@@ -120,12 +120,9 @@ export default function HomePage() {
     <div>
       {/* ================= HERO ================= */}
       <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-[var(--surface)] p-6 md:p-10">
-        {/* glow */}
         <div className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-[var(--accent)]/25 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-black/20" />
-
-        {/* accent bar */}
         <div className="absolute left-0 top-0 h-full w-1.5 bg-[var(--accent)]" />
 
         <div className="relative max-w-3xl">
@@ -134,17 +131,14 @@ export default function HomePage() {
           </h1>
 
           <p className="mt-4 text-lg text-white/75">
-            Curated deals on <b>electric dirt bikes</b>, <b>e-bikes</b>, and
-            essential riding gear — picked the same way I review bikes on the
-            channel.
+            Curated deals on electric dirt bikes, e-bikes, and essential riding
+            gear — picked the same way I review bikes on the channel.
           </p>
 
           {/* TRUST STRIP — EXACT TEXT */}
           <div className="mt-4 inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-black/30 px-4 py-2 text-sm text-white/85">
             <span className="text-[var(--accent)]">🎥</span>
-            <span>
-              <b className="text-white">From Ridin With D</b> — real bike reviews, real riding, real opinions.
-            </span>
+            <span>From Ridin With D — real bike reviews, real riding, real opinions.</span>
           </div>
 
           <div className="mt-6 flex flex-wrap items-center gap-3">
@@ -161,24 +155,6 @@ export default function HomePage() {
               Get Email Alerts
             </a>
           </div>
-        </div>
-
-        {/* Tabs */}
-        <div className="relative mt-8 flex flex-wrap gap-2">
-          {(["Electric Dirt Bikes", "E-Bikes", "Gear"] as Tab[]).map((t) => (
-            <button
-              key={t}
-              onClick={() => setTab(t)}
-              className={
-                "rounded-xl border px-4 py-2 text-sm font-semibold transition " +
-                (tab === t
-                  ? "bg-[var(--accent)] text-black border-transparent"
-                  : "border-white/20 text-white/80 hover:bg-white/10")
-              }
-            >
-              {t}
-            </button>
-          ))}
         </div>
       </div>
 
@@ -256,59 +232,16 @@ export default function HomePage() {
           <label className="text-sm font-medium text-white/80">Search</label>
           <input
             className="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-white"
-            placeholder={
-              tab === "Gear"
-                ? "Try: boots, helmet, gloves…"
-                : "Try: mid-drive, hub, brand…"
-            }
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
         </div>
       </div>
 
-      {/* ================= RESULTS ================= */}
       <div id="results" />
-
-      {base.length === 0 ? (
-        <div className="mt-10 rounded-2xl border border-white/10 bg-white/5 p-6 text-white/70">
-          No results for that tab / region / filter.
-        </div>
-      ) : (
-        <>
-          <Section
-            title={
-              tab === "Electric Dirt Bikes"
-                ? "Budget-Friendly Electric Dirt Bikes"
-                : tab === "E-Bikes"
-                ? "Budget-Friendly E-Bikes"
-                : "Budget Gear Deals"
-            }
-            subtitle={
-              tab === "Electric Dirt Bikes"
-                ? "Cheaper entry options + mini e-motos."
-                : tab === "E-Bikes"
-                ? "Often hub-motor value buys."
-                : "Affordable essentials (sales + closeouts)."
-            }
-            deals={budget}
-          />
-
-          <Section
-            title="Mid-Range Picks"
-            subtitle="Good performance per dollar."
-            deals={mid}
-          />
-
-          <Section
-            title="Premium / High-Performance"
-            subtitle="Top-tier builds and best spec."
-            deals={premium}
-          />
-        </>
-      )}
     </div>
   );
 }
+
 
 
