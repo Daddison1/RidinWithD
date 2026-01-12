@@ -146,12 +146,12 @@ export default function HomePage() {
 
           {/* TRUST / YOUTUBE STRIP */}
           <div className="mt-4 inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-black/30 px-4 py-2 text-sm text-white/85">
-            <span className="text-[var(--accent)]">🎥</span>
-            <span>
-              <b className="text-white">From Ridin With D</b> — real bike reviews,
-              real riding, real opinions.
-            </span>
-          </div>
+  <span className="text-[var(--accent)]">🎥</span>
+  <span>
+    <b className="text-white">From Ridin With D</b> — real bike reviews, real riding, real opinions.
+  </span>
+</div>
+
 
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <a
