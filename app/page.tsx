@@ -24,11 +24,12 @@ function sortDeals(deals: Deal[], sort: Sort) {
   const copy = [...deals];
   if (sort === "priceLow") return copy.sort((a, b) => a.price - b.price);
   if (sort === "priceHigh") return copy.sort((a, b) => b.price - a.price);
-  if (sort === "newest")
+  if (sort === "newest") {
     return copy.sort(
       (a, b) =>
         +new Date(b.lastUpdatedISO) - +new Date(a.lastUpdatedISO)
     );
+  }
   return copy.sort((a, b) => {
     const da = pctOff(a);
     const db = pctOff(b);
@@ -49,7 +50,7 @@ function Section({
   if (deals.length === 0) return null;
 
   return (
-    <section className="mt-10">
+    <section className="mt-12">
       <div className="flex items-end justify-between gap-4">
         <div>
           <h2 className="text-lg font-semibold text-white">{title}</h2>
@@ -117,36 +118,43 @@ export default function HomePage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-white">Current Deals</h1>
-      <div className="mt-2 text-white/70">
-        Browse by region. Tabs separate{" "}
-        <b>Electric Dirt Bikes</b>, <b>E-bikes</b>, and <b>Gear</b>.
+      {/* ================= HERO SECTION ================= */}
+      <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/10 to-white/5 p-6 md:p-8">
+        <div className="max-w-3xl">
+          <h1 className="text-3xl font-extrabold tracking-tight text-white md:text-4xl">
+            Best Dirt Bike & E-Bike Deals
+          </h1>
+
+          <p className="mt-3 text-base text-white/75">
+            Curated deals on <b>electric dirt bikes</b>, <b>e-bikes</b>, and
+            essential riding gear — hand-picked the same way I review bikes on
+            the channel.
+          </p>
+        </div>
+
+        {/* Tabs */}
+        <div className="mt-6 flex flex-wrap gap-2">
+          {(["Electric Dirt Bikes", "E-Bikes", "Gear"] as Tab[]).map((t) => (
+            <button
+              key={t}
+              onClick={() => setTab(t)}
+              className={
+                "rounded-xl border px-4 py-2 text-sm font-semibold transition " +
+                (tab === t
+                  ? "bg-[var(--accent)] text-black border-transparent"
+                  : "border-white/20 text-white/80 hover:bg-white/10")
+              }
+            >
+              {t}
+            </button>
+          ))}
+        </div>
       </div>
 
-      {/* Tabs */}
-      <div className="mt-6 flex flex-wrap gap-2">
-        {(["Electric Dirt Bikes", "E-Bikes", "Gear"] as Tab[]).map((t) => (
-          <button
-            key={t}
-            onClick={() => setTab(t)}
-            className={
-              "rounded-xl border px-4 py-2 text-sm font-medium transition " +
-              (tab === t
-                ? "bg-[var(--accent)] text-black border-transparent"
-                : "border-white/15 text-white/80 hover:bg-white/10")
-            }
-          >
-            {t}
-          </button>
-        ))}
-      </div>
-
-      {/* Filters */}
-      <div className="mt-4 grid gap-4 rounded-2xl border border-white/10 bg-white/5 p-4 md:grid-cols-4">
+      {/* ================= FILTERS ================= */}
+      <div className="mt-6 grid gap-4 rounded-2xl border border-white/10 bg-white/5 p-4 md:grid-cols-4">
         <div>
-          <label className="text-sm font-medium text-white/80">
-            Region
-          </label>
+          <label className="text-sm font-medium text-white/80">Region</label>
           <select
             className="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-white"
             value={region}
@@ -200,9 +208,7 @@ export default function HomePage() {
         </div>
 
         <div>
-          <label className="text-sm font-medium text-white/80">
-            Sort
-          </label>
+          <label className="text-sm font-medium text-white/80">Sort</label>
           <select
             className="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-white"
             value={sort}
@@ -216,9 +222,7 @@ export default function HomePage() {
         </div>
 
         <div className="md:col-span-4">
-          <label className="text-sm font-medium text-white/80">
-            Search
-          </label>
+          <label className="text-sm font-medium text-white/80">Search</label>
           <input
             className="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-white"
             placeholder={
@@ -232,8 +236,9 @@ export default function HomePage() {
         </div>
       </div>
 
+      {/* ================= RESULTS ================= */}
       {base.length === 0 ? (
-        <div className="mt-8 rounded-2xl border border-white/10 bg-white/5 p-6 text-white/70">
+        <div className="mt-10 rounded-2xl border border-white/10 bg-white/5 p-6 text-white/70">
           No results for that tab / region / filter.
         </div>
       ) : (
@@ -255,11 +260,13 @@ export default function HomePage() {
             }
             deals={budget}
           />
+
           <Section
             title="Mid-Range Picks"
             subtitle="Good performance per dollar."
             deals={mid}
           />
+
           <Section
             title="Premium / High-Performance"
             subtitle="Top-tier builds and best spec."
@@ -270,4 +277,3 @@ export default function HomePage() {
     </div>
   );
 }
-
