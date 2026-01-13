@@ -1,18 +1,7 @@
-export type Region = "US" | "CA" | "UK" | "DE" | "AU" | "IN";
-
+export type Region = "US";
 export type DealKind = "Bike" | "Ebike" | "Gear";
 export type DriveType = "Mid-Drive" | "Hub Motor" | "Unknown";
 export type PriceTier = "Budget" | "Mid" | "Premium";
-
-export type GearCategory =
-  | "Helmet"
-  | "Boots"
-  | "Pants"
-  | "Gloves"
-  | "Protection"
-  | "Jersey"
-  | "Goggles"
-  | "Other";
 
 export type Deal = {
   id: string;
@@ -20,152 +9,152 @@ export type Deal = {
   brand: string;
   retailer: string;
   region: Region;
-
   kind: DealKind;
-
-  // Bike/Ebike only
   driveType?: DriveType;
-
-  // Gear only
-  gearCategory?: GearCategory;
-
   price: number;
-  wasPrice?: number;
   tier: PriceTier;
-
   url: string;
   imageUrl?: string;
   highlights: string[];
   lastUpdatedISO: string;
 };
 
-export const REGIONS: { code: Region; label: string }[] = [
-  { code: "US", label: "United States" },
-  { code: "CA", label: "Canada" },
-  { code: "UK", label: "United Kingdom" },
-  { code: "DE", label: "Germany" },
-  { code: "AU", label: "Australia" },
-  { code: "IN", label: "India" },
-];
+export const REGIONS = [{ code: "US", label: "United States" }];
+
+const PLACEHOLDER =
+  "https://images.unsplash.com/photo-1558981033-64b0f4f5f41e?auto=format&fit=crop&w=1200&q=60";
 
 export const SAMPLE_DEALS: Deal[] = [
   // =====================================================
-  // ELECTRIC DIRT BIKES (US) — YOUTH + ADULT
+  // BUDGET ELECTRIC DIRT BIKES (≤ ~$1,500)
   // =====================================================
-
-  // --- Youth / entry ---
   {
-    id: "bike-hiboy-dk1",
+    id: "razor-mx350",
+    title: "Razor MX350 Dirt Rocket (Youth)",
+    brand: "Razor",
+    retailer: "Razor",
+    region: "US",
+    kind: "Bike",
+    driveType: "Mid-Drive",
+    price: 299,
+    tier: "Budget",
+    url: "https://razor.com/product/mx350-dirt-rocket/",
+    imageUrl: PLACEHOLDER,
+    highlights: ["Youth bike", "Chain drive", "Great starter"],
+    lastUpdatedISO: new Date().toISOString(),
+  },
+  {
+    id: "razor-mx650",
+    title: "Razor MX650 Dirt Rocket",
+    brand: "Razor",
+    retailer: "Razor",
+    region: "US",
+    kind: "Bike",
+    driveType: "Mid-Drive",
+    price: 599,
+    tier: "Budget",
+    url: "https://razor.com/product/mx650-dirt-rocket/",
+    imageUrl: PLACEHOLDER,
+    highlights: ["Teen bike", "17 mph", "Popular backyard ripper"],
+    lastUpdatedISO: new Date().toISOString(),
+  },
+  {
+    id: "hiboy-dk1",
     title: "Hiboy DK1 Electric Dirt Bike (Youth)",
     brand: "Hiboy",
     retailer: "Hiboy",
     region: "US",
     kind: "Bike",
     driveType: "Hub Motor",
-    price: 359.99,
+    price: 399,
     tier: "Budget",
-    url: "https://www.hiboy.com/products/hiboy-dk1-electric-dirt-bike-for-kids-ages-3-13",
-    imageUrl:
-      "https://www.hiboy.com/cdn/shop/files/DK04.jpg?v=1765848028&width=1600",
-    highlights: ["300W motor", "3 speed modes", "Great starter for kids"],
+    url: "https://www.hiboy.com/products/hiboy-dk1-electric-dirt-bike-for-kids",
+    imageUrl: PLACEHOLDER,
+    highlights: ["Hub motor", "Quiet", "Kids friendly"],
     lastUpdatedISO: new Date().toISOString(),
   },
-
   {
-    id: "bike-razor-mx650",
-    title: "Razor MX650 Dirt Rocket",
-    brand: "Razor",
-    retailer: "Razor",
+    id: "mototec-36v",
+    title: "MotoTec 36V 1000W Dirt Bike",
+    brand: "MotoTec",
+    retailer: "MotoTec USA",
     region: "US",
     kind: "Bike",
-    driveType: "Unknown",
-    price: 599,
-    wasPrice: 699,
+    driveType: "Mid-Drive",
+    price: 650,
     tier: "Budget",
-    url: "https://razor.com/product/mx650-dirt-rocket/",
-    imageUrl:
-      "https://razor.com/wp-content/uploads/2025/05/MX650_YE_SideRight.jpg",
-    highlights: ["Classic mini e-dirt bike", "Chain drive", "Great first ripper"],
+    url: "https://mototecusa.com",
+    imageUrl: PLACEHOLDER,
+    highlights: ["1000W", "Adjustable speed", "Youth/teen"],
     lastUpdatedISO: new Date().toISOString(),
   },
-
-  // --- Requested bikes (budget) ---
   {
-    id: "bike-qronge-x1-spark",
-    title: "Qronge X1 Spark — 4500W mid-drive electric dirt bike",
+    id: "qronge-x1",
+    title: "Qronge X1 Spark",
     brand: "Qronge",
     retailer: "Qronge",
     region: "US",
     kind: "Bike",
     driveType: "Mid-Drive",
-    price: 1149.99,
-    wasPrice: 2199.99,
+    price: 1149,
     tier: "Budget",
     url: "https://www.qronge.com/products/x1-spark",
-    imageUrl:
-      "https://www.qronge.com/cdn/shop/files/1_e1ea7378-5c89-4686-a641-948daf278d44.jpg?v=1767000664&width=1200",
-    highlights: ["4500W peak listed", "Mid-drive", "Budget e-dirt favorite"],
+    imageUrl: PLACEHOLDER,
+    highlights: ["4500W peak (claimed)", "Mini dirt bike", "Budget mid-drive"],
     lastUpdatedISO: new Date().toISOString(),
   },
-
   {
-    id: "bike-yozma-in10",
-    title: "Yozma IN 10 — 2600W mid-drive mini dirt bike",
+    id: "yozma-in10",
+    title: "Yozma IN 10",
     brand: "Yozma",
     retailer: "Yozma Sport",
     region: "US",
     kind: "Bike",
     driveType: "Mid-Drive",
-    price: 1259.99,
-    wasPrice: 1599.0,
+    price: 1259,
     tier: "Budget",
     url: "https://yozmasport.com/products/in-10",
-    imageUrl:
-      "https://yozmasport.com/cdn/shop/files/Group_41_94ff018a-cd32-475e-a02a-0af0b18cfd24.png?v=1765267218&width=1600",
-    highlights: ["2600W listed", "Mid-drive", "Great teen/smaller adult size"],
+    imageUrl: PLACEHOLDER,
+    highlights: ["2600W", "Mini size", "Teen-friendly"],
     lastUpdatedISO: new Date().toISOString(),
   },
-
   {
-    id: "bike-tuttio-soleil01",
-    title: "Tuttio Soleil01 — 48V 2000W mini bike",
+    id: "tuttio-soleil01",
+    title: "Tuttio Soleil01",
     brand: "Tuttio",
     retailer: "TuttioSport",
     region: "US",
     kind: "Bike",
     driveType: "Unknown",
-    price: 1299.0,
-    wasPrice: 1399.0,
+    price: 1299,
     tier: "Budget",
     url: "https://tuttiosport.com/products/tuttio-soleil01-electric-bike",
-    imageUrl:
-      "https://tuttiosport.com/cdn/shop/files/adult-electric-motorcycle-2000w-cheap-dirtt-bike.jpg?v=1763629112&width=1200",
-    highlights: ["48V 2000W listed", "Pit-bike style", "Budget-friendly"],
+    imageUrl: PLACEHOLDER,
+    highlights: ["2000W claimed", "Pit-bike style", "Budget option"],
     lastUpdatedISO: new Date().toISOString(),
   },
 
-  // --- Mid-range ---
+  // =====================================================
+  // MID-RANGE ELECTRIC DIRT BIKES (~$1,500–$3,500)
+  // =====================================================
   {
-    id: "bike-mototec-48v-pro",
-    title: "MotoTec 48V Pro — 1800W electric dirt bike",
+    id: "mototec-48v-pro",
+    title: "MotoTec 48V Pro",
     brand: "MotoTec",
     retailer: "MotoTec USA",
     region: "US",
     kind: "Bike",
-    driveType: "Unknown",
-    price: 1017,
-    wasPrice: 1099,
+    driveType: "Mid-Drive",
+    price: 1099,
     tier: "Mid",
-    url: "https://mototecusa.com/mototec-48v-pro-electric-dirt-bike-1800w-lithium-blue.html",
-    imageUrl:
-      "https://mototecusa.com/assets/images/MT-Dirt-Pro-1800_Blue.jpg",
-    highlights: ["1800W listed", "Good step-up bike", "Adjustable speed"],
+    url: "https://mototecusa.com",
+    imageUrl: PLACEHOLDER,
+    highlights: ["1800W", "Step-up performance", "Adjustable limiter"],
     lastUpdatedISO: new Date().toISOString(),
   },
-
   {
-    id: "bike-freego-nova3",
-    title: "Freego Nova 3 — 3000W mid-drive electric dirt bike",
+    id: "freego-nova3",
+    title: "Freego Nova 3",
     brand: "Freego",
     retailer: "Freego Bikes",
     region: "US",
@@ -173,16 +162,14 @@ export const SAMPLE_DEALS: Deal[] = [
     driveType: "Mid-Drive",
     price: 1699,
     tier: "Mid",
-    url: "https://freegobikes.com/products/freego-nova3-mid-drive-electric-motorcycle",
-    imageUrl:
-      "https://freegobikes.com/cdn/shop/files/Freego_Nova2_RightFrontView.png?v=1757667053",
-    highlights: ["3000W listed", "Mid-drive", "Moto styling"],
+    url: "https://freegobikes.com",
+    imageUrl: PLACEHOLDER,
+    highlights: ["3000W", "Full suspension", "Mid-drive"],
     lastUpdatedISO: new Date().toISOString(),
   },
-
   {
-    id: "bike-freego-x2-pro",
-    title: "Freego X2 Pro — dirt-style e-bike",
+    id: "freego-x2-pro",
+    title: "Freego X2 Pro",
     brand: "Freego",
     retailer: "Freego Bikes",
     region: "US",
@@ -190,33 +177,32 @@ export const SAMPLE_DEALS: Deal[] = [
     driveType: "Hub Motor",
     price: 2499,
     tier: "Mid",
-    url: "https://freegobikes.com/products/freego-x2-pro-all-terrain-off-road-motorcycle-electric-dirt-bike-with-pedals",
-    imageUrl:
-      "https://freegobikes.com/cdn/shop/files/freego-x2pro-dirt-ebike-transparent.png?v=1764301240&width=416",
-    highlights: ["Hub motor style", "All-terrain", "Good value category"],
+    url: "https://freegobikes.com",
+    imageUrl: PLACEHOLDER,
+    highlights: ["Hub motor", "Dirt styling", "Adult-capable"],
     lastUpdatedISO: new Date().toISOString(),
   },
-
-  // --- Premium / adult performance ---
   {
-    id: "bike-happyrun-g300-pro",
-    title: "HappyRun G300 Pro — high-power hub dirt bike",
+    id: "happyrun-g300",
+    title: "HappyRun G300 Pro",
     brand: "HappyRun",
-    retailer: "Electric Ride Co.",
+    retailer: "Electric Ride Co",
     region: "US",
     kind: "Bike",
     driveType: "Hub Motor",
     price: 3299,
-    tier: "Premium",
-    url: "https://electricrideco.com/products/happyrun-g300-pro-electric-dirt-bike",
-    imageUrl:
-      "https://cdn.shopify.com/s/files/1/0612/2546/8142/files/1920.webp?v=1740053517",
-    highlights: ["High power hub style", "Moto look", "Off-road focused"],
+    tier: "Mid",
+    url: "https://electricrideco.com",
+    imageUrl: PLACEHOLDER,
+    highlights: ["72V system", "Full-size look", "Hub motor"],
     lastUpdatedISO: new Date().toISOString(),
   },
 
+  // =====================================================
+  // PREMIUM ELECTRIC DIRT BIKES (~$3,500–$7,000)
+  // =====================================================
   {
-    id: "bike-talaria-sting-r-mx4",
+    id: "talaria-sting-r",
     title: "Talaria Sting R MX4",
     brand: "Talaria",
     retailer: "Luna Cycle",
@@ -225,84 +211,41 @@ export const SAMPLE_DEALS: Deal[] = [
     driveType: "Mid-Drive",
     price: 4099,
     tier: "Premium",
-    url: "https://lunacycle.com/talaria-sting-r-mx4/",
-    imageUrl:
-      "https://cdn11.bigcommerce.com/s-9vkjq73s/images/stencil/1280w/products/2264/14651/TALARIA_R_01_WATERMARKED__94760.1680339572.jpg?c=2",
-    highlights: ["Mid-drive platform", "Trail capable", "Popular Sur-Ron competitor"],
+    url: "https://lunacycle.com",
+    imageUrl: PLACEHOLDER,
+    highlights: ["Mid-drive", "Sur-Ron competitor", "Trail-ready"],
     lastUpdatedISO: new Date().toISOString(),
   },
-
   {
-    id: "bike-surron-light-bee-x",
+    id: "surron-light-bee",
     title: "Sur-Ron Light Bee X",
     brand: "Sur-Ron",
-    retailer: "Sur-Ron (official images)",
+    retailer: "Sur-Ron USA",
     region: "US",
     kind: "Bike",
     driveType: "Mid-Drive",
     price: 4600,
     tier: "Premium",
-    url: "https://surron.ca/pages/light-bee-x",
-    imageUrl:
-      "https://cdn.shopify.com/s/files/1/0540/6644/6508/files/lightBeeX-Green.png?v=1744836704",
+    url: "https://sur-ronusa.com",
+    imageUrl: PLACEHOLDER,
     highlights: ["Most popular platform", "Huge aftermarket", "Mid-drive"],
     lastUpdatedISO: new Date().toISOString(),
   },
-
   {
-    id: "bike-surron-ultra-bee",
+    id: "surron-ultra-bee",
     title: "Sur-Ron Ultra Bee",
     brand: "Sur-Ron",
-    retailer: "Sur-Ron (official images)",
+    retailer: "Sur-Ron USA",
     region: "US",
     kind: "Bike",
     driveType: "Mid-Drive",
     price: 6999,
     tier: "Premium",
-    url: "https://surron.ca/pages/ultra-bee",
-    imageUrl:
-      "https://cdn.shopify.com/s/files/1/0540/6644/6508/files/UltraBee-black.png?v=1744895801",
-    highlights: ["Bigger chassis", "Higher power class", "Mid-drive"],
-    lastUpdatedISO: new Date().toISOString(),
-  },
-
-  // =====================================================
-  // KEEP 1–2 ITEMS FOR OTHER TABS (OPTIONAL)
-  // =====================================================
-
-  {
-    id: "ebike-placeholder",
-    title: "Budget E-bike (placeholder)",
-    brand: "ExampleBrand",
-    retailer: "Retailer",
-    region: "US",
-    kind: "Ebike",
-    driveType: "Hub Motor",
-    price: 999,
-    wasPrice: 1299,
-    tier: "Budget",
-    url: "https://example.com/budget-ebike",
-    imageUrl:
-      "https://images.unsplash.com/photo-1520975682038-6f3f04caa3c5?auto=format&fit=crop&w=1200&q=60",
-    highlights: ["Hub motor", "Commuter friendly", "Placeholder for now"],
-    lastUpdatedISO: new Date().toISOString(),
-  },
-
-  {
-    id: "gear-placeholder",
-    title: "Boots (placeholder)",
-    brand: "Example",
-    retailer: "Retailer",
-    region: "US",
-    kind: "Gear",
-    gearCategory: "Boots",
-    price: 199,
-    tier: "Mid",
-    url: "https://example.com/boots",
-    imageUrl:
-      "https://images.unsplash.com/photo-1528701800489-20be3c3ea4a2?auto=format&fit=crop&w=1200&q=60",
-    highlights: ["Placeholder", "Swap later", "Just to populate tabs"],
+    url: "https://sur-ronusa.com",
+    imageUrl: PLACEHOLDER,
+    highlights: ["Bigger chassis", "More power", "Serious trail bike"],
     lastUpdatedISO: new Date().toISOString(),
   },
 ];
+
 
