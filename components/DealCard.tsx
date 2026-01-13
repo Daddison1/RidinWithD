@@ -12,7 +12,7 @@ const FALLBACK_IMAGE =
 function proxied(src?: string) {
   const s = src?.trim();
   if (!s) return FALLBACK_IMAGE;
-  if (s.startsWith("/")) return s; // local image, don't proxy
+  if (s.startsWith("/")) return s; // local image, no proxy
   return `/api/img?u=${encodeURIComponent(s)}`;
 }
 
@@ -37,7 +37,6 @@ export default function DealCard({ deal }: { deal: Deal }) {
           loading="lazy"
           onError={(e) => {
             const img = e.currentTarget;
-            // If proxy fails, fall back
             if (img.src !== FALLBACK_IMAGE) img.src = FALLBACK_IMAGE;
           }}
           className="h-full w-full object-cover transition group-hover:scale-[1.02]"
