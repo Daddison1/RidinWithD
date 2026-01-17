@@ -30,7 +30,12 @@ export default function DealCard({ deal }: { deal: Deal }) {
           loading="lazy"
           onError={(e) => {
             const img = e.currentTarget;
-            if (img.src !== FALLBACK_IMAGE) img.src = FALLBACK_IMAGE;
+
+            // Prevent infinite error loop
+            if (!img.dataset.fallbackApplied) {
+              img.dataset.fallbackApplied = "true";
+              img.src = FALLBACK_IMAGE;
+            }
           }}
           className="h-full w-full object-cover transition group-hover:scale-[1.02]"
         />
