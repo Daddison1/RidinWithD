@@ -60,8 +60,13 @@ export const REGIONS: { code: Region; label: string }[] = [
   { code: "IN", label: "India" },
 ];
 
+/**
+ * IMPORTANT:
+ * Your old placeholder URL was returning 404, which made every card look "broken".
+ * This placeholder is a working Unsplash image.
+ */
 const PLACEHOLDER =
-  "https://images.unsplash.com/photo-1558981033-64b0f4f5f41e?auto=format&fit=crop&w=1200&q=60";
+  "https://images.unsplash.com/photo-1714065256915-0b61c2edb550?auto=format&fit=crop&fm=jpg&q=60&w=1200";
 
 const nowISO = () => new Date().toISOString();
 
