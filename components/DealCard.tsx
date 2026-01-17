@@ -9,11 +9,19 @@ function formatMoney(n: number) {
 const FALLBACK_IMAGE =
   "https://images.unsplash.com/photo-1558981033-64b0f4f5f41e?auto=format&fit=crop&w=1200&q=60";
 
+// 👇 THIS IS THE IMPORTANT PART
+function proxied(src: string) {
+  return `/api/img?u=${encodeURIComponent(src)}`;
+}
+
 export default function DealCard({ deal }: { deal: Deal }) {
   const discount =
     deal.wasPrice && deal.wasPrice > deal.price
       ? Math.round(((deal.wasPrice - deal.price) / deal.wasPrice) * 100)
       : null;
+
+  // 👇 USE PROXY IF imageUrl EXISTS
+  const imgSrc = deal.imageUrl ? proxied(deal.imageUrl) : FALLBACK_IMAGE;
 
   return (
     <a
@@ -25,7 +33,7 @@ export default function DealCard({ deal }: { deal: Deal }) {
       <div className="aspect-[16/9] w-full overflow-hidden bg-white/5">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={deal.imageUrl ?? FALLBACK_IMAGE}
+          src={imgSrc}
           alt={deal.title}
           loading="lazy"
           onError={(e) => {
@@ -90,3 +98,4 @@ export default function DealCard({ deal }: { deal: Deal }) {
     </a>
   );
 }
+
