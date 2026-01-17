@@ -9,9 +9,16 @@ function formatMoney(n: number) {
 const FALLBACK_IMAGE =
   "https://images.unsplash.com/photo-1558981033-64b0f4f5f41e?auto=format&fit=crop&w=1200&q=60";
 
-// 👇 THIS IS THE IMPORTANT PART
 function proxied(src: string) {
   return `/api/img?u=${encodeURIComponent(src)}`;
+}
+
+function shouldProxy(src: string) {
+  // Unsplash is usually safe to load directly (and you’re seeing 404 via proxy)
+  if (src.includes("images.unsplash.com")) return false;
+
+  // Proxy everything else that is remote
+  return /^https?:\/\//i.test(src);
 }
 
 export default function DealCard({ deal }: { deal: Deal }) {
@@ -20,8 +27,8 @@ export default function DealCard({ deal }: { deal: Deal }) {
       ? Math.round(((deal.wasPrice - deal.price) / deal.wasPrice) * 100)
       : null;
 
-  // 👇 USE PROXY IF imageUrl EXISTS
-  const imgSrc = deal.imageUrl ? proxied(deal.imageUrl) : FALLBACK_IMAGE;
+  const rawSrc = deal.imageUrl ?? FALLBACK_IMAGE;
+  const imgSrc = shouldProxy(rawSrc) ? proxied(rawSrc) : rawSrc;
 
   return (
     <a
@@ -38,8 +45,6 @@ export default function DealCard({ deal }: { deal: Deal }) {
           loading="lazy"
           onError={(e) => {
             const img = e.currentTarget;
-
-            // Prevent infinite error loop
             if (!img.dataset.fallbackApplied) {
               img.dataset.fallbackApplied = "true";
               img.src = FALLBACK_IMAGE;
@@ -98,4 +103,3 @@ export default function DealCard({ deal }: { deal: Deal }) {
     </a>
   );
 }
-
