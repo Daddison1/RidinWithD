@@ -14,20 +14,15 @@ export type GearCategory =
   | "Goggles"
   | "Other";
 
-export type Deal = {
+/* =====================================================
+   BASE DEAL (shared fields)
+===================================================== */
+type BaseDeal = {
   id: string;
   title: string;
   brand: string;
   retailer: string;
   region: Region;
-
-  kind: DealKind;
-
-  // Bike/Ebike only
-  driveType?: DriveType;
-
-  // Gear only
-  gearCategory?: GearCategory;
 
   price: number;
   wasPrice?: number;
@@ -38,6 +33,23 @@ export type Deal = {
   highlights: string[];
   lastUpdatedISO: string;
 };
+
+/* =====================================================
+   DISCRIMINATED UNION TYPES (safer)
+===================================================== */
+export type BikeDeal = BaseDeal & {
+  kind: "Bike" | "Ebike";
+  driveType: DriveType;
+  gearCategory?: never;
+};
+
+export type GearDeal = BaseDeal & {
+  kind: "Gear";
+  gearCategory: GearCategory;
+  driveType?: never;
+};
+
+export type Deal = BikeDeal | GearDeal;
 
 export const REGIONS: { code: Region; label: string }[] = [
   { code: "US", label: "United States" },
