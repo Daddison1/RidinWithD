@@ -6,8 +6,9 @@ function formatMoney(n: number) {
   return n.toLocaleString(undefined, { style: "currency", currency: "USD" });
 }
 
-const FALLBACK_IMAGE =
-  "https://images.unsplash.com/photo-1558981033-64b0f4f5f41e?auto=format&fit=crop&w=1200&q=60";
+  const FALLBACK_IMAGE =
+  "https://images.unsplash.com/photo-1714065256915-0b61c2edb550?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=1200";
+
 
 function proxied(src: string) {
   return `/api/img?u=${encodeURIComponent(src)}`;
