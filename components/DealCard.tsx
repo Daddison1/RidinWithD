@@ -3,24 +3,15 @@
 import type { Deal } from "@/lib/deals";
 
 function formatMoney(n: number) {
-  return n.toLocaleString(undefined, { style: "currency", currency: "USD" });
+  return n.toLocaleString(undefined, {
+    style: "currency",
+    currency: "USD",
+  });
 }
 
-  const FALLBACK_IMAGE =
-  "https://images.unsplash.com/photo-1714065256915-0b61c2edb550?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=1200";
-
-
-function proxied(src: string) {
-  return `/api/img?u=${encodeURIComponent(src)}`;
-}
-
-function shouldProxy(src: string) {
-  // Unsplash is usually safe to load directly (and you’re seeing 404 via proxy)
-  if (src.includes("images.unsplash.com")) return false;
-
-  // Proxy everything else that is remote
-  return /^https?:\/\//i.test(src);
-}
+// Only used if a deal is missing an imageUrl
+const FALLBACK_IMAGE =
+  "https://images.unsplash.com/photo-1558981033-64b0f4f5f41e?auto=format&fit=crop&w=1200&q=60";
 
 export default function DealCard({ deal }: { deal: Deal }) {
   const discount =
@@ -28,8 +19,7 @@ export default function DealCard({ deal }: { deal: Deal }) {
       ? Math.round(((deal.wasPrice - deal.price) / deal.wasPrice) * 100)
       : null;
 
-  const rawSrc = deal.imageUrl ?? FALLBACK_IMAGE;
-  const imgSrc = shouldProxy(rawSrc) ? proxied(rawSrc) : rawSrc;
+  const imgSrc = deal.imageUrl || FALLBACK_IMAGE;
 
   return (
     <a
@@ -46,8 +36,7 @@ export default function DealCard({ deal }: { deal: Deal }) {
           loading="lazy"
           onError={(e) => {
             const img = e.currentTarget;
-            if (!img.dataset.fallbackApplied) {
-              img.dataset.fallbackApplied = "true";
+            if (img.src !== FALLBACK_IMAGE) {
               img.src = FALLBACK_IMAGE;
             }
           }}
@@ -60,9 +49,14 @@ export default function DealCard({ deal }: { deal: Deal }) {
           <div>
             <div className="text-xs text-white/60">
               {deal.retailer} • {deal.region} • {deal.kind}
-              {deal.driveType ? ` • ${deal.driveType}` : ""}
-              {deal.gearCategory ? ` • ${deal.gearCategory}` : ""}
+              {"driveType" in deal && deal.driveType
+                ? ` • ${deal.driveType}`
+                : ""}
+              {"gearCategory" in deal && deal.gearCategory
+                ? ` • ${deal.gearCategory}`
+                : ""}
             </div>
+
             <h3 className="mt-1 line-clamp-2 font-semibold text-white">
               {deal.title}
             </h3>
@@ -80,11 +74,11 @@ export default function DealCard({ deal }: { deal: Deal }) {
             {formatMoney(deal.price)}
           </div>
 
-          {deal.wasPrice ? (
+          {deal.wasPrice && (
             <div className="text-sm text-white/60 line-through">
               {formatMoney(deal.wasPrice)}
             </div>
-          ) : null}
+          )}
 
           <div className="ml-auto rounded-xl border border-white/10 bg-white/5 px-2 py-1 text-xs font-semibold text-white/80">
             {deal.tier}
