@@ -307,7 +307,8 @@ export const SAMPLE_DEALS: Deal[] = [
   price: 1699,
   tier: "Mid",
   url: "https://freegobikes.com/products/freego-nova3-mid-drive-electric-motorcycle",
-  imageUrl: "https://cdn.shopify.com/s/files/1/0635/2142/1861/files/Freego_Nova_3_Electric_Motorcycle_2.jpg?v=1745040846",
+  imageUrl:
+    "https://freegobikes.com/cdn/shop/files/freego-nova3-dirt-ebike-transparent.png?v=1762745009&width=1946",
   highlights: ["Moto styling", "Mid-drive", "Budget adult category"],
   lastUpdatedISO: nowISO(),
 },
@@ -322,7 +323,8 @@ export const SAMPLE_DEALS: Deal[] = [
   price: 2499,
   tier: "Mid",
   url: "https://freegobikes.com/products/freego-x2-pro-all-terrain-off-road-motorcycle-electric-dirt-bike-with-pedals",
-  imageUrl: "https://cdn.shopify.com/s/files/1/0635/2142/1861/files/FreegoX2ProAllTerrainOffRoadMotorcycleElectricDirtBikeWithPedals_36.jpg?v=1745408584",
+  imageUrl:
+    "https://freegobikes.com/cdn/shop/files/freego-x2pro-dirt-ebike-transparent.png?v=1764301240&width=1946",
   highlights: ["Dirt styling", "Hub motor", "Adult-capable"],
   lastUpdatedISO: nowISO(),
 },
@@ -336,8 +338,9 @@ export const SAMPLE_DEALS: Deal[] = [
   driveType: "Mid-Drive",
   price: 1099,
   tier: "Mid",
-  url: "https://mototecusa.com/mototec-48v-1800w-pro-electric-dirt-bike-red.html",
-  imageUrl: "https://mototecusa.com/assets/images/MT-Dirt-Bike-48v-1800w-Pro-Red.jpg",
+  url: "https://mototecusa.com/mototec-48v-pro-electric-dirt-bike-1800w-lithium-green.html?srsltid=AfmBOorQn-Y3IBzbQfZlph0nRtWKkso6Fac12dA5wkCT16uYZtDsjEme",
+  imageUrl:
+    "https://dirtmotobikes.com/cdn/shop/files/MT-Dirt-Pro-1800_Green_4.webp?v=1737778606&width=1946",
   highlights: ["Mini dirt bike", "Step-up power", "Adjustable speed"],
   lastUpdatedISO: nowISO(),
 },
