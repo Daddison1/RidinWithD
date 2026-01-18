@@ -9,7 +9,6 @@ function formatMoney(n: number) {
   });
 }
 
-// Only used if a deal is missing an imageUrl
 const FALLBACK_IMAGE =
   "https://images.unsplash.com/photo-1558981033-64b0f4f5f41e?auto=format&fit=crop&w=1200&q=60";
 
@@ -44,14 +43,19 @@ export default function DealCard({ deal }: { deal: Deal }) {
         />
       </div>
 
+      {/* ✅ DEBUG: shows exactly what src your card is using */}
+      <div className="p-2 text-[10px] text-white/60 break-all">
+        <div>id: {deal.id}</div>
+        <div>deal.imageUrl: {deal.imageUrl ?? "NO imageUrl"}</div>
+        <div>imgSrc used: {imgSrc}</div>
+      </div>
+
       <div className="p-4">
         <div className="flex items-start justify-between gap-3">
           <div>
             <div className="text-xs text-white/60">
               {deal.retailer} • {deal.region} • {deal.kind}
-              {"driveType" in deal && deal.driveType
-                ? ` • ${deal.driveType}`
-                : ""}
+              {"driveType" in deal && deal.driveType ? ` • ${deal.driveType}` : ""}
               {"gearCategory" in deal && deal.gearCategory
                 ? ` • ${deal.gearCategory}`
                 : ""}
@@ -98,3 +102,4 @@ export default function DealCard({ deal }: { deal: Deal }) {
     </a>
   );
 }
+
