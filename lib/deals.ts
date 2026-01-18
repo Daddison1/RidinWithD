@@ -136,7 +136,7 @@ export const SAMPLE_DEALS: Deal[] = [
     highlights: ["Off-brand", "Youth/teen", "Budget entry option"],
     lastUpdatedISO: nowISO(),
   },
-  {
+  
    {
   id: "bike-mototec-36v-1000w",
   title: "MotoTec 36V 1000W Dirt Bike (Youth/Teen)",
