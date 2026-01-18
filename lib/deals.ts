@@ -154,7 +154,7 @@ export const SAMPLE_DEALS: Deal[] = [
   lastUpdatedISO: nowISO(),
 },
 
-  },
+
   {
     id: "bike-apollo-rfn-sxe500",
     title: "Apollo RFN SX-E500 (Kids Mini Motocross)",
