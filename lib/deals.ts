@@ -161,10 +161,11 @@ export const SAMPLE_DEALS: Deal[] = [
   tier: "Mid",
   url: "https://yozmasport.com/products/in-10",
   imageUrl:
-    "https://yozmasport.com/cdn/shop/files/in-10-black.png?v=1738826304&width=1200",
+    "https://yozmasport.com/cdn/shop/files/Group_41_94ff018a-cd32-475e-a02a-0af0b18cfd24.png?v=1765267218&width=1200",
   highlights: ["Teen / adult capable", "Strong mid-range value", "Aggressive styling"],
   lastUpdatedISO: nowISO(),
 },
+
 
 {
   id: "bike-qronge-x1-spark",
