@@ -3,103 +3,117 @@
 import type { Deal } from "@/lib/deals";
 
 function formatMoney(n: number) {
-  return n.toLocaleString(undefined, {
-    style: "currency",
-    currency: "USD",
-  });
+  return n.toLocaleString(undefined, { style: "currency", currency: "USD" });
 }
 
 const FALLBACK_IMAGE =
   "https://images.unsplash.com/photo-1558981033-64b0f4f5f41e?auto=format&fit=crop&w=1200&q=60";
 
-export default function DealCard({ deal }: { deal: Deal }) {
-  const discount =
-    deal.wasPrice && deal.wasPrice > deal.price
-      ? Math.round(((deal.wasPrice - deal.price) / deal.wasPrice) * 100)
-      : null;
+function proxied(src: string) {
+  return `/api/img?u=${encodeURIComponent(src)}`;
+}
 
-  const imgSrc = deal.imageUrl || FALLBACK_IMAGE;
+function pctOff(deal: Deal) {
+  if (!deal.wasPrice || deal.wasPrice <= deal.price) return 0;
+  return Math.round(((deal.wasPrice - deal.price) / deal.wasPrice) * 100);
+}
+
+function Badge({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="inline-flex items-center rounded-full border border-white/15 bg-black/30 px-2 py-0.5 text-xs font-semibold text-white/85">
+      {children}
+    </span>
+  );
+}
+
+export default function DealCard({ deal }: { deal: Deal }) {
+  const off = pctOff(deal);
+
+  // Badge logic
+  const badges: string[] = [];
+
+  if (deal.kind === "Gear") {
+    badges.push(deal.gearCategory);
+  } else if (deal.kind === "GasBike") {
+    const bt = (deal as any).brandType as "Import" | "NameBrand" | undefined;
+    badges.push(bt === "Import" ? "Import Gas" : bt === "NameBrand" ? "Name Brand" : "Gas Bike");
+  } else {
+    // Electric dirt bikes / E-bikes
+    badges.push(deal.driveType ?? "Unknown");
+  }
+
+  // Show tier badge too (Budget/Mid/Premium)
+  badges.push(deal.tier);
+
+  const imgSrc = proxied(deal.imageUrl || FALLBACK_IMAGE);
 
   return (
     <a
       href={deal.url}
       target="_blank"
       rel="noreferrer"
-      className="group overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-sm backdrop-blur transition hover:-translate-y-0.5 hover:border-white/20 hover:shadow-md"
+      className="group block overflow-hidden rounded-2xl border border-white/10 bg-white/5 transition hover:border-white/20 hover:bg-white/10"
     >
-      <div className="aspect-[16/9] w-full overflow-hidden bg-white/5">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
+      {/* Image */}
+      <div className="relative aspect-[16/10] overflow-hidden bg-black/20">
         <img
           src={imgSrc}
           alt={deal.title}
-          loading="lazy"
+          className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.03]"
           onError={(e) => {
-            const img = e.currentTarget;
-            if (img.src !== FALLBACK_IMAGE) {
-              img.src = FALLBACK_IMAGE;
-            }
+            const el = e.currentTarget;
+            // prevent infinite loop
+            if (el.dataset.fallback === "1") return;
+            el.dataset.fallback = "1";
+            el.src = proxied(FALLBACK_IMAGE);
           }}
-          className="h-full w-full object-cover transition group-hover:scale-[1.02]"
         />
+
+        {/* Badges */}
+        <div className="absolute left-3 top-3 flex flex-wrap gap-2">
+          {badges.map((b) => (
+            <Badge key={b}>{b}</Badge>
+          ))}
+          {off > 0 && <Badge>{off}% OFF</Badge>}
+        </div>
       </div>
 
-      {/* ✅ DEBUG: shows exactly what src your card is using */}
-      <div className="p-2 text-[10px] text-white/60 break-all">
-        <div>id: {deal.id}</div>
-        <div>deal.imageUrl: {deal.imageUrl ?? "NO imageUrl"}</div>
-        <div>imgSrc used: {imgSrc}</div>
-      </div>
-
+      {/* Body */}
       <div className="p-4">
         <div className="flex items-start justify-between gap-3">
-          <div>
-            <div className="text-xs text-white/60">
-              {deal.retailer} • {deal.region} • {deal.kind}
-              {"driveType" in deal && deal.driveType ? ` • ${deal.driveType}` : ""}
-              {"gearCategory" in deal && deal.gearCategory
-                ? ` • ${deal.gearCategory}`
-                : ""}
+          <div className="min-w-0">
+            <div className="truncate text-sm font-semibold text-white">{deal.title}</div>
+            <div className="mt-1 truncate text-xs text-white/60">
+              {deal.brand} • {deal.retailer}
             </div>
-
-            <h3 className="mt-1 line-clamp-2 font-semibold text-white">
-              {deal.title}
-            </h3>
           </div>
 
-          {discount !== null && (
-            <div className="shrink-0 rounded-xl bg-[var(--accent)] px-2 py-1 text-xs font-extrabold text-black">
-              -{discount}%
-            </div>
-          )}
-        </div>
-
-        <div className="mt-3 flex items-baseline gap-2">
-          <div className="text-lg font-extrabold text-white">
-            {formatMoney(deal.price)}
-          </div>
-
-          {deal.wasPrice && (
-            <div className="text-sm text-white/60 line-through">
-              {formatMoney(deal.wasPrice)}
-            </div>
-          )}
-
-          <div className="ml-auto rounded-xl border border-white/10 bg-white/5 px-2 py-1 text-xs font-semibold text-white/80">
-            {deal.tier}
+          {/* Price */}
+          <div className="shrink-0 text-right">
+            <div className="text-sm font-extrabold text-white">{formatMoney(deal.price)}</div>
+            {deal.wasPrice && deal.wasPrice > deal.price ? (
+              <div className="text-xs text-white/55 line-through">
+                {formatMoney(deal.wasPrice)}
+              </div>
+            ) : null}
           </div>
         </div>
 
-        <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-white/75">
-          {deal.highlights.slice(0, 3).map((h) => (
-            <li key={h}>{h}</li>
-          ))}
-        </ul>
+        {/* Highlights */}
+        {deal.highlights?.length ? (
+          <ul className="mt-3 space-y-1 text-xs text-white/70">
+            {deal.highlights.slice(0, 3).map((h, i) => (
+              <li key={i} className="truncate">
+                • {h}
+              </li>
+            ))}
+          </ul>
+        ) : null}
 
-        <div className="mt-4 text-xs text-white/50">
-          Updated {new Date(deal.lastUpdatedISO).toLocaleDateString()}
+        <div className="mt-4 text-xs font-semibold text-[var(--accent)]">
+          View deal →
         </div>
       </div>
     </a>
   );
 }
-
