@@ -10,6 +10,7 @@ import {
   type DealKind,
   type DriveType,
   type GearCategory,
+  type BrandType,
 } from "@/lib/deals";
 
 type Tab = "Electric Dirt Bikes" | "Gas Dirt Bikes" | "E-Bikes" | "Gear";
@@ -68,6 +69,26 @@ function Section({
   );
 }
 
+function PromoBox() {
+  return (
+    <div className="mt-6 rounded-2xl border border-white/10 bg-black/20 p-4 text-white/80">
+      <div className="text-sm font-semibold text-white">Dealer Network Promotions</div>
+      <div className="mt-2 text-sm text-white/70">
+        Name-brand gas bikes often have rebates, low-APR financing, and seasonal incentives that vary
+        by dealer and region.
+      </div>
+      <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-white/70">
+        <li>Watch for manufacturer rebates (“customer cash”) on select models.</li>
+        <li>Some brands offer promo financing during spring/summer.</li>
+        <li>Dealer setup + freight can change the out-the-door price a lot.</li>
+      </ul>
+      <div className="mt-3 text-xs text-white/50">
+        Tip: If you want, I can add a “Promos” page where you post current rebates by brand.
+      </div>
+    </div>
+  );
+}
+
 export default function HomePage() {
   const [tab, setTab] = useState<Tab>("Electric Dirt Bikes");
   const [region, setRegion] = useState<Region>("US");
@@ -79,8 +100,12 @@ export default function HomePage() {
   const [driveType, setDriveType] = useState<DriveType | "All">("All");
   const [gearCategory, setGearCategory] = useState<GearCategory | "All">("All");
 
+  // For Gas Bikes sub-category filtering
+  const [gasType, setGasType] = useState<BrandType | "All">("All");
+
   const showDriveType = tab === "Electric Dirt Bikes" || tab === "E-Bikes";
   const showGearCategory = tab === "Gear";
+  const showGasType = tab === "Gas Dirt Bikes";
 
   const base = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -100,7 +125,7 @@ export default function HomePage() {
       deals = deals.filter((d) => {
         const hay = `${d.title} ${d.brand} ${d.retailer} ${d.kind} ${d.driveType ?? ""} ${
           d.gearCategory ?? ""
-        }`.toLowerCase();
+        } ${(d as any).brandType ?? ""}`.toLowerCase();
         return hay.includes(q);
       });
     }
@@ -115,12 +140,33 @@ export default function HomePage() {
       deals = deals.filter((d) => d.gearCategory === gearCategory);
     }
 
-    return sortDeals(deals, sort);
-  }, [tab, region, query, sort, driveType, gearCategory, showDriveType, showGearCategory]);
+    // Gas sub-category filter
+    if (showGasType && gasType !== "All") {
+      deals = deals.filter((d) => (d as any).brandType === gasType);
+    }
 
+    return sortDeals(deals, sort);
+  }, [
+    tab,
+    region,
+    query,
+    sort,
+    driveType,
+    gearCategory,
+    gasType,
+    showDriveType,
+    showGearCategory,
+    showGasType,
+  ]);
+
+  // Default tier sections (works for electric + ebike + gear)
   const budget = base.filter((d) => d.tier === "Budget");
   const mid = base.filter((d) => d.tier === "Mid");
   const premium = base.filter((d) => d.tier === "Premium");
+
+  // Gas split sections (only used when tab === "Gas Dirt Bikes")
+  const gasImport = base.filter((d) => (d as any).brandType === "Import");
+  const gasNameBrand = base.filter((d) => (d as any).brandType === "NameBrand");
 
   return (
     <div>
@@ -176,7 +222,11 @@ export default function HomePage() {
                 // reset per-tab filters so you don’t get "empty results" confusion
                 if (t === "Gear") setDriveType("All");
                 if (t !== "Gear") setGearCategory("All");
-                if (t === "Gas Dirt Bikes") setDriveType("All");
+                if (t === "Gas Dirt Bikes") {
+                  setDriveType("All");
+                  setGasType("All");
+                }
+                if (t !== "Gas Dirt Bikes") setGasType("All");
               }}
               className={
                 "rounded-xl border px-4 py-2 text-sm font-semibold transition " +
@@ -208,6 +258,7 @@ export default function HomePage() {
           </select>
         </div>
 
+        {/* Drive Type */}
         <div className={!showDriveType ? "hidden md:block" : ""}>
           <label className="text-sm font-medium text-white/80">Drive Type</label>
           <select
@@ -223,6 +274,7 @@ export default function HomePage() {
           </select>
         </div>
 
+        {/* Gear Category */}
         <div className={!showGearCategory ? "hidden md:block" : ""}>
           <label className="text-sm font-medium text-white/80">Gear Category</label>
           <select
@@ -243,6 +295,21 @@ export default function HomePage() {
           </select>
         </div>
 
+        {/* Gas Type */}
+        <div className={!showGasType ? "hidden md:block" : ""}>
+          <label className="text-sm font-medium text-white/80">Gas Category</label>
+          <select
+            className="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-white"
+            value={gasType}
+            onChange={(e) => setGasType(e.target.value as any)}
+            disabled={!showGasType}
+          >
+            <option value="All">All</option>
+            <option value="Import">Import Gas Dirt Bikes</option>
+            <option value="NameBrand">Name-Brand Gas Dirt Bikes</option>
+          </select>
+        </div>
+
         <div>
           <label className="text-sm font-medium text-white/80">Sort</label>
           <select
@@ -250,7 +317,6 @@ export default function HomePage() {
             value={sort}
             onChange={(e) => setSort(e.target.value as Sort)}
           >
-            {/* ✅ Cheaper first at the top */}
             <option value="priceLow">Cheapest first</option>
             <option value="priceHigh">Most expensive first</option>
             <option value="newest">Newest</option>
@@ -282,14 +348,28 @@ export default function HomePage() {
         <div className="mt-10 rounded-2xl border border-white/10 bg-white/5 p-6 text-white/70">
           No results for that tab / region / filter.
         </div>
+      ) : tab === "Gas Dirt Bikes" ? (
+        <>
+          <Section
+            title="Import Gas Dirt Bikes"
+            subtitle="Direct-import gas bikes focused on value pricing."
+            deals={gasImport}
+          />
+
+          <Section
+            title="Name-Brand Gas Dirt Bikes"
+            subtitle="OEM bikes sold through dealer networks. Incentives vary by region."
+            deals={gasNameBrand}
+          />
+
+          <PromoBox />
+        </>
       ) : (
         <>
           <Section
             title={
               tab === "Electric Dirt Bikes"
                 ? "Budget-Friendly Electric Dirt Bikes"
-                : tab === "Gas Dirt Bikes"
-                ? "Budget-Friendly Gas Dirt Bikes"
                 : tab === "E-Bikes"
                 ? "Budget-Friendly E-Bikes"
                 : "Budget Gear Deals"
@@ -297,8 +377,6 @@ export default function HomePage() {
             subtitle={
               tab === "Electric Dirt Bikes"
                 ? "Cheaper entry options + mini e-motos."
-                : tab === "Gas Dirt Bikes"
-                ? "Beginner-friendly gas bikes and value picks."
                 : tab === "E-Bikes"
                 ? "Often hub-motor value buys."
                 : "Affordable essentials (sales + closeouts)."
@@ -318,4 +396,5 @@ export default function HomePage() {
     </div>
   );
 }
+
 
