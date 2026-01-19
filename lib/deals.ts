@@ -248,37 +248,136 @@ export const SAMPLE_DEALS: Deal[] = [
   // =====================================================
 
   // -------- Import Gas Dirt Bikes --------
-  {
-    id: "gas-apollo-rfz-125",
-    title: "Apollo RFZ 125 (Import)",
-    brand: "Apollo",
-    retailer: "Online / Import",
-    region: "US",
-    kind: "GasBike",
-    brandType: "Import",
-    price: 0,
-    tier: "Budget",
-    url: "https://apollomotors.ca/",
-    imageUrl: PLACEHOLDER,
-    highlights: ["Value-focused import", "Good starter class", "Crate-shipped style"],
-    lastUpdatedISO: nowISO(),
-  },
+  // =====================================================
+// GAS DIRT BIKES — IMPORT BRANDS (SHIP TO DOOR)
+// =====================================================
 
-  {
-    id: "gas-kayo-tt125",
-    title: "Kayo TT125 (Import)",
-    brand: "Kayo",
-    retailer: "Online / Import",
-    region: "US",
-    kind: "GasBike",
-    brandType: "Import",
-    price: 0,
-    tier: "Mid",
-    url: "https://www.kayo-usa.com/",
-    imageUrl: PLACEHOLDER,
-    highlights: ["Popular import brand", "Strong value", "Trail-focused"],
-    lastUpdatedISO: nowISO(),
-  },
+{
+  id: "gas-xpro-x27-125",
+  title: "X-Pro X27 125cc Dirt Bike",
+  brand: "X-Pro",
+  retailer: "XProUSA",
+  region: "US",
+  kind: "GasBike",
+  driveType: "Unknown",
+  price: 859.95,
+  tier: "Budget",
+  url: "https://xprousa.com/products/x-pro-x27-125cc-dirt-bike",
+  imageUrl:
+    "https://cdn.shopify.com/s/files/1/0618/3874/3069/products/x27-blue_1200x.jpg",
+  highlights: [
+    "Semi-automatic transmission",
+    "Free shipping (lower 48)",
+    "Assembly required"
+  ],
+  lastUpdatedISO: nowISO(),
+},
+
+{
+  id: "gas-xpro-x9-125",
+  title: "X-Pro X9 125cc Dirt Bike",
+  brand: "X-Pro",
+  retailer: "XProUSA",
+  region: "US",
+  kind: "GasBike",
+  driveType: "Unknown",
+  price: 959.95,
+  tier: "Budget",
+  url: "https://xprousa.com/products/x-pro-x9-125cc-dirt-bike",
+  imageUrl:
+    "https://cdn.shopify.com/s/files/1/0618/3874/3069/products/x9-blue_1200x.jpg",
+  highlights: [
+    "Manual 4-speed",
+    "17/14 wheel setup",
+    "Free shipping"
+  ],
+  lastUpdatedISO: nowISO(),
+},
+
+{
+  id: "gas-xpro-x19-125",
+  title: "X-Pro X19 125cc Dirt Bike",
+  brand: "X-Pro",
+  retailer: "XProUSA",
+  region: "US",
+  kind: "GasBike",
+  driveType: "Unknown",
+  price: 959.95,
+  tier: "Budget",
+  url: "https://xprousa.com/products/x-pro-x19-125cc-dirt-bike",
+  imageUrl:
+    "https://cdn.shopify.com/s/files/1/0618/3874/3069/products/x19-blue_1200x.jpg",
+  highlights: [
+    "Semi-auto clutch",
+    "Trail-size wheels",
+    "Crated shipping"
+  ],
+  lastUpdatedISO: nowISO(),
+},
+
+{
+  id: "gas-trailmaster-tm23-125",
+  title: "TrailMaster TM23 125cc",
+  brand: "TrailMaster",
+  retailer: "GoPowerSports",
+  region: "US",
+  kind: "GasBike",
+  driveType: "Unknown",
+  price: 1149.0,
+  tier: "Mid",
+  url: "https://www.gopowersports.com/trailmaster-tm23-125cc-dirt-bike/",
+  imageUrl:
+    "https://www.gopowersports.com/cdn/shop/products/TM23-125-blue_1200x.jpg",
+  highlights: [
+    "Electric start",
+    "Semi-automatic",
+    "Better suspension"
+  ],
+  lastUpdatedISO: nowISO(),
+},
+
+{
+  id: "gas-trailmaster-mk125",
+  title: "TrailMaster MK125",
+  brand: "TrailMaster",
+  retailer: "GoPowerSports",
+  region: "US",
+  kind: "GasBike",
+  driveType: "Unknown",
+  price: 1399.0,
+  tier: "Mid",
+  url: "https://www.gopowersports.com/trailmaster-mk125-dirt-bike/",
+  imageUrl:
+    "https://www.gopowersports.com/cdn/shop/products/MK125-blue_1200x.jpg",
+  highlights: [
+    "Manual clutch",
+    "Electric start",
+    "Higher-quality components"
+  ],
+  lastUpdatedISO: nowISO(),
+},
+
+{
+  id: "gas-venom-thunder-125",
+  title: "Venom Thunder 125cc",
+  brand: "Venom",
+  retailer: "Venom Motorsports USA",
+  region: "US",
+  kind: "GasBike",
+  driveType: "Unknown",
+  price: 1499.99,
+  tier: "Mid",
+  url: "https://venommotorsportsusa.com/products/venom-thunder-125cc-dirt-bike",
+  imageUrl:
+    "https://venommotorsportsusa.com/cdn/shop/products/thunder-125-blue_1200x.jpg",
+  highlights: [
+    "Manual 4-speed",
+    "Full-size feel",
+    "Nationwide shipping"
+  ],
+  lastUpdatedISO: nowISO(),
+},
+
 
   // -------- Name-Brand Gas Dirt Bikes --------
   {
