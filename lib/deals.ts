@@ -126,113 +126,116 @@ export const SAMPLE_DEALS: Deal[] = [
     lastUpdatedISO: nowISO(),
   },
 
-  // =====================================================
-  // MID-RANGE
-  // =====================================================
+ // ==========================
+// MID-RANGE (fix images)
+// ==========================
 
-  {
-    id: "bike-tuttio-soleil01",
-    title: "Tuttio Soleil01 Electric Dirt Bike",
-    brand: "Tuttio",
-    retailer: "TuttioSport",
-    region: "US",
-    kind: "Bike",
-    driveType: "Unknown",
-    price: 1299,
-    wasPrice: 1399,
-    tier: "Mid",
-    url: "https://tuttiosport.com/products/tuttio-soleil01-electric-bike",
-    imageUrl:
-      "https://tuttiosport.com/cdn/shop/products/tuttio_soleil01_electric_bike.jpg",
-    highlights: ["Pit-bike style", "Good value", "Mid-range power"],
-    lastUpdatedISO: nowISO(),
-  },
+{
+  id: "bike-tuttio-soleil01",
+  title: "Tuttio Soleil01 Electric Dirt Bike",
+  brand: "Tuttio",
+  retailer: "TuttioSport",
+  region: "US",
+  kind: "Bike",
+  driveType: "Unknown",
+  price: 1299,
+  wasPrice: 1399,
+  tier: "Mid",
+  url: "https://tuttiosport.com/products/tuttio-soleil01-electric-bike",
+  imageUrl:
+    "https://tuttiosport.com/cdn/shop/files/tuttio-soleil01.png?v=1746531602&width=1200",
+  highlights: ["Pit-bike style", "Good value", "Mid-range power"],
+  lastUpdatedISO: nowISO(),
+},
 
-  {
-    id: "bike-yozma-in10",
-    title: "Yozma IN-10 Electric Dirt Bike",
-    brand: "Yozma",
-    retailer: "Yozma Sport",
-    region: "US",
-    kind: "Bike",
-    driveType: "Mid-Drive",
-    price: 1259,
-    wasPrice: 1599,
-    tier: "Mid",
-    url: "https://yozmasport.com/products/in-10",
-    imageUrl:
-      "https://yozmasport.com/cdn/shop/products/yozma_in10_mini_electric_dirt_bike.jpg",
-    highlights: ["Teen / adult capable", "Strong mid-range value", "Aggressive styling"],
-    lastUpdatedISO: nowISO(),
-  },
+{
+  id: "bike-yozma-in10",
+  title: "Yozma IN-10 Electric Dirt Bike",
+  brand: "Yozma",
+  retailer: "Yozma Sport",
+  region: "US",
+  kind: "Bike",
+  driveType: "Mid-Drive",
+  price: 1259,
+  wasPrice: 1599,
+  tier: "Mid",
+  url: "https://yozmasport.com/products/in-10",
+  imageUrl:
+    "https://yozmasport.com/cdn/shop/files/in-10-black.png?v=1738826304&width=1200",
+  highlights: ["Teen / adult capable", "Strong mid-range value", "Aggressive styling"],
+  lastUpdatedISO: nowISO(),
+},
 
-  {
-    id: "bike-qronge-x1-spark",
-    title: "Qronge X1 Spark",
-    brand: "Qronge",
-    retailer: "Qronge",
-    region: "US",
-    kind: "Bike",
-    driveType: "Mid-Drive",
-    price: 1149,
-    wasPrice: 2199,
-    tier: "Mid",
-    url: "https://www.qronge.com/products/x1-spark",
-    imageUrl:
-      "https://qronge.com/cdn/shop/products/qronge_x1_spark_offroad_electric_dirt_bike.jpg",
-    highlights: ["High claimed wattage", "Popular review bike", "Great sale value"],
-    lastUpdatedISO: nowISO(),
-  },
+{
+  id: "bike-qronge-x1-spark",
+  title: "Qronge X1 Spark",
+  brand: "Qronge",
+  retailer: "Qronge",
+  region: "US",
+  kind: "Bike",
+  driveType: "Mid-Drive",
+  price: 1149,
+  wasPrice: 2199,
+  tier: "Mid",
+  url: "https://www.qronge.com/products/x1-spark",
+  imageUrl:
+    "https://www.qronge.com/cdn/shop/files/2025-12-26-Q_M_3.png?v=1767173964&width=1200",
+  highlights: ["High claimed wattage", "Popular review bike", "Great sale value"],
+  lastUpdatedISO: nowISO(),
+},
 
-  // =====================================================
-  // TOP TIER
-  // =====================================================
+// ==========================
+// TOP TIER (fix images)
+// ==========================
 
-  {
-    id: "bike-eride-pro-s",
-    title: "E Ride Pro S",
-    brand: "E Ride Pro",
-    retailer: "E Ride Pro",
-    region: "US",
-    kind: "Bike",
-    driveType: "Mid-Drive",
-    price: 0,
-    tier: "Premium",
-    url: "https://eridepros.com/",
-    imageUrl: PLACEHOLDER,
-    highlights: ["High-performance e-moto", "Top-tier platform", "Upgrade friendly"],
-    lastUpdatedISO: nowISO(),
-  },
+{
+  id: "bike-eride-pro-s",
+  title: "E Ride Pro S",
+  brand: "E Ride Pro",
+  retailer: "E Ride Pro",
+  region: "US",
+  kind: "Bike",
+  driveType: "Mid-Drive",
+  price: 3999,
+  tier: "Premium",
+  url: "https://www.eridepro.com/products/pro-s",
+  imageUrl:
+    "https://www.eridepro.com/cdn/shop/files/S16-1_1200x.jpg?v=1766548419",
+  highlights: ["High-performance e-moto", "Top-tier platform", "Upgrade friendly"],
+  lastUpdatedISO: nowISO(),
+},
 
-  {
-    id: "bike-eride-pro-sr",
-    title: "E Ride Pro SR",
-    brand: "E Ride Pro",
-    retailer: "E Ride Pro",
-    region: "US",
-    kind: "Bike",
-    driveType: "Mid-Drive",
-    price: 0,
-    tier: "Premium",
-    url: "https://eridepros.com/",
-    imageUrl: PLACEHOLDER,
-    highlights: ["Higher spec version", "More range & power", "Premium class"],
-    lastUpdatedISO: nowISO(),
-  },
+{
+  id: "bike-eride-pro-sr",
+  title: "E Ride Pro SR",
+  brand: "E Ride Pro",
+  retailer: "E Ride Pro",
+  region: "US",
+  kind: "Bike",
+  driveType: "Mid-Drive",
+  price: 5699,
+  tier: "Premium",
+  url: "https://www.eridepro.com/products/pro-sr",
+  imageUrl:
+    "https://www.eridepro.com/cdn/shop/files/removed_bg_sr_5e15d193-69fe-4749-bf32-47ce66002c04_1200x.png?v=1760463738",
+  highlights: ["Higher spec version", "More range & power", "Premium class"],
+  lastUpdatedISO: nowISO(),
+},
 
-  {
-    id: "bike-surron-ultra-bee",
-    title: "Sur-Ron Ultra Bee",
-    brand: "Sur-Ron",
-    retailer: "Sur-Ron / Dealers",
-    region: "US",
-    kind: "Bike",
-    driveType: "Mid-Drive",
-    price: 6999,
-    tier: "Premium",
-    url: "https://sur-ronusa.us.com/",
-    imageUrl: PLACEHOLDER,
-    highlights: ["Full-size e-moto", "Enduro capable", "Elite performance"],
-    lastUpdatedISO: nowISO(),
-  },
-];
+{
+  id: "bike-surron-ultra-bee",
+  title: "Sur-Ron Ultra Bee",
+  brand: "Sur-Ron",
+  retailer: "Sur-Ron / Dealers",
+  region: "US",
+  kind: "Bike",
+  driveType: "Mid-Drive",
+  price: 5200,
+  tier: "Premium",
+  url: "https://sur-ronusa.us.com/product/surron-ultra-bee/",
+  imageUrl:
+    "https://sur-ronusa.us.com/wp-content/uploads/2025/01/sur-ron-ultra-bee-700x467.jpg",
+  highlights: ["Full-size e-moto", "Enduro capable", "Elite performance"],
+  lastUpdatedISO: nowISO(),
+},
+
