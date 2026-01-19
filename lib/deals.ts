@@ -252,6 +252,10 @@ export const SAMPLE_DEALS: Deal[] = [
 // GAS DIRT BIKES — IMPORT BRANDS (SHIP TO DOOR)
 // =====================================================
 
+// =====================================================
+// GAS DIRT BIKES — IMPORT BRANDS (SHIP TO DOOR)
+// =====================================================
+
 {
   id: "gas-xpro-x27-125",
   title: "X-Pro X27 125cc Dirt Bike",
@@ -259,17 +263,14 @@ export const SAMPLE_DEALS: Deal[] = [
   retailer: "XProUSA",
   region: "US",
   kind: "GasBike",
+  brandType: "Import",
   driveType: "Unknown",
   price: 859.95,
   tier: "Budget",
   url: "https://xprousa.com/products/x-pro-x27-125cc-dirt-bike",
   imageUrl:
     "https://cdn.shopify.com/s/files/1/0618/3874/3069/products/x27-blue_1200x.jpg",
-  highlights: [
-    "Semi-automatic transmission",
-    "Free shipping (lower 48)",
-    "Assembly required"
-  ],
+  highlights: ["Semi-automatic transmission", "Free shipping (lower 48)", "Assembly required"],
   lastUpdatedISO: nowISO(),
 },
 
@@ -280,17 +281,14 @@ export const SAMPLE_DEALS: Deal[] = [
   retailer: "XProUSA",
   region: "US",
   kind: "GasBike",
+  brandType: "Import",
   driveType: "Unknown",
   price: 959.95,
   tier: "Budget",
   url: "https://xprousa.com/products/x-pro-x9-125cc-dirt-bike",
   imageUrl:
     "https://cdn.shopify.com/s/files/1/0618/3874/3069/products/x9-blue_1200x.jpg",
-  highlights: [
-    "Manual 4-speed",
-    "17/14 wheel setup",
-    "Free shipping"
-  ],
+  highlights: ["Manual 4-speed", "17/14 wheel setup", "Free shipping"],
   lastUpdatedISO: nowISO(),
 },
 
@@ -301,17 +299,14 @@ export const SAMPLE_DEALS: Deal[] = [
   retailer: "XProUSA",
   region: "US",
   kind: "GasBike",
+  brandType: "Import",
   driveType: "Unknown",
   price: 959.95,
   tier: "Budget",
   url: "https://xprousa.com/products/x-pro-x19-125cc-dirt-bike",
   imageUrl:
     "https://cdn.shopify.com/s/files/1/0618/3874/3069/products/x19-blue_1200x.jpg",
-  highlights: [
-    "Semi-auto clutch",
-    "Trail-size wheels",
-    "Crated shipping"
-  ],
+  highlights: ["Semi-auto clutch", "Trail-size wheels", "Crated shipping"],
   lastUpdatedISO: nowISO(),
 },
 
@@ -322,17 +317,14 @@ export const SAMPLE_DEALS: Deal[] = [
   retailer: "GoPowerSports",
   region: "US",
   kind: "GasBike",
+  brandType: "Import",
   driveType: "Unknown",
   price: 1149.0,
   tier: "Mid",
   url: "https://www.gopowersports.com/trailmaster-tm23-125cc-dirt-bike/",
   imageUrl:
     "https://www.gopowersports.com/cdn/shop/products/TM23-125-blue_1200x.jpg",
-  highlights: [
-    "Electric start",
-    "Semi-automatic",
-    "Better suspension"
-  ],
+  highlights: ["Electric start", "Semi-automatic", "Better suspension"],
   lastUpdatedISO: nowISO(),
 },
 
@@ -343,17 +335,14 @@ export const SAMPLE_DEALS: Deal[] = [
   retailer: "GoPowerSports",
   region: "US",
   kind: "GasBike",
+  brandType: "Import",
   driveType: "Unknown",
   price: 1399.0,
   tier: "Mid",
   url: "https://www.gopowersports.com/trailmaster-mk125-dirt-bike/",
   imageUrl:
     "https://www.gopowersports.com/cdn/shop/products/MK125-blue_1200x.jpg",
-  highlights: [
-    "Manual clutch",
-    "Electric start",
-    "Higher-quality components"
-  ],
+  highlights: ["Manual clutch", "Electric start", "Higher-quality components"],
   lastUpdatedISO: nowISO(),
 },
 
@@ -364,19 +353,17 @@ export const SAMPLE_DEALS: Deal[] = [
   retailer: "Venom Motorsports USA",
   region: "US",
   kind: "GasBike",
+  brandType: "Import",
   driveType: "Unknown",
   price: 1499.99,
   tier: "Mid",
   url: "https://venommotorsportsusa.com/products/venom-thunder-125cc-dirt-bike",
   imageUrl:
     "https://venommotorsportsusa.com/cdn/shop/products/thunder-125-blue_1200x.jpg",
-  highlights: [
-    "Manual 4-speed",
-    "Full-size feel",
-    "Nationwide shipping"
-  ],
+  highlights: ["Manual 4-speed", "Full-size feel", "Nationwide shipping"],
   lastUpdatedISO: nowISO(),
 },
+
 
 
   // -------- Name-Brand Gas Dirt Bikes --------
