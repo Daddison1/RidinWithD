@@ -4,6 +4,9 @@ export type DealKind = "Bike" | "GasBike" | "Ebike" | "Gear";
 export type DriveType = "Mid-Drive" | "Hub Motor" | "Unknown";
 export type PriceTier = "Budget" | "Mid" | "Premium";
 
+// NEW: for Gas Dirt Bikes sub-categories
+export type BrandType = "Import" | "NameBrand";
+
 export type GearCategory =
   | "Helmet"
   | "Boots"
@@ -32,6 +35,9 @@ type BaseDeal = {
   imageUrl?: string;
   highlights: string[];
   lastUpdatedISO: string;
+
+  // OPTIONAL: used for GasBike sub-categories (Import vs NameBrand)
+  brandType?: BrandType;
 };
 
 /* =====================================================
@@ -39,7 +45,7 @@ type BaseDeal = {
 ===================================================== */
 export type BikeDeal = BaseDeal & {
   kind: "Bike" | "GasBike" | "Ebike";
-  // Gas bikes don't need a driveType, so make it optional
+  // Gas bikes don't need a driveType, so keep optional
   driveType?: DriveType;
   gearCategory?: never;
 };
@@ -237,46 +243,84 @@ export const SAMPLE_DEALS: Deal[] = [
   },
 
   // =====================================================
-  // GAS DIRT BIKES (NEW CATEGORY)
-  // Using PLACEHOLDER images to avoid hotlink blocks.
+  // GAS DIRT BIKES
+  // (We’ll split these into Import vs NameBrand in the UI next)
   // =====================================================
+
+  // -------- Import Gas Dirt Bikes --------
+  {
+    id: "gas-apollo-rfz-125",
+    title: "Apollo RFZ 125 (Import)",
+    brand: "Apollo",
+    retailer: "Online / Import",
+    region: "US",
+    kind: "GasBike",
+    brandType: "Import",
+    price: 0,
+    tier: "Budget",
+    url: "https://apollomotors.ca/",
+    imageUrl: PLACEHOLDER,
+    highlights: ["Value-focused import", "Good starter class", "Crate-shipped style"],
+    lastUpdatedISO: nowISO(),
+  },
+
+  {
+    id: "gas-kayo-tt125",
+    title: "Kayo TT125 (Import)",
+    brand: "Kayo",
+    retailer: "Online / Import",
+    region: "US",
+    kind: "GasBike",
+    brandType: "Import",
+    price: 0,
+    tier: "Mid",
+    url: "https://www.kayo-usa.com/",
+    imageUrl: PLACEHOLDER,
+    highlights: ["Popular import brand", "Strong value", "Trail-focused"],
+    lastUpdatedISO: nowISO(),
+  },
+
+  // -------- Name-Brand Gas Dirt Bikes --------
   {
     id: "gas-yamaha-ttr110",
-    title: "Yamaha TT-R110",
+    title: "Yamaha TT-R110 (Name Brand)",
     brand: "Yamaha",
     retailer: "Dealers",
     region: "US",
     kind: "GasBike",
+    brandType: "NameBrand",
     price: 0,
     tier: "Budget",
     url: "https://www.yamahamotorsports.com/",
     imageUrl: PLACEHOLDER,
-    highlights: ["Beginner friendly", "Great starter gas bike", "Easy to maintain"],
+    highlights: ["Beginner friendly", "Great starter gas bike", "Dealer network support"],
     lastUpdatedISO: nowISO(),
   },
 
   {
     id: "gas-honda-crf125f",
-    title: "Honda CRF125F",
+    title: "Honda CRF125F (Name Brand)",
     brand: "Honda",
     retailer: "Dealers",
     region: "US",
     kind: "GasBike",
+    brandType: "NameBrand",
     price: 0,
     tier: "Mid",
     url: "https://powersports.honda.com/",
     imageUrl: PLACEHOLDER,
-    highlights: ["Reliable trail bike", "Smooth power", "Great resale"],
+    highlights: ["Reliable trail bike", "Smooth power", "Great resale value"],
     lastUpdatedISO: nowISO(),
   },
 
   {
     id: "gas-ktm-250sxf",
-    title: "KTM 250 SX-F",
+    title: "KTM 250 SX-F (Name Brand)",
     brand: "KTM",
     retailer: "Dealers",
     region: "US",
     kind: "GasBike",
+    brandType: "NameBrand",
     price: 0,
     tier: "Premium",
     url: "https://www.ktm.com/",
@@ -285,5 +329,4 @@ export const SAMPLE_DEALS: Deal[] = [
     lastUpdatedISO: nowISO(),
   },
 ];
-
 
