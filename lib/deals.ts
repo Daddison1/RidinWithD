@@ -237,5 +237,5 @@ export const SAMPLE_DEALS: Deal[] = [
     "https://sur-ronusa.us.com/wp-content/uploads/2025/01/sur-ron-ultra-bee-700x467.jpg",
   highlights: ["Full-size e-moto", "Enduro capable", "Elite performance"],
   lastUpdatedISO: nowISO(),
-},
+}
 
