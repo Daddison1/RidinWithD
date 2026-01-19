@@ -12,7 +12,7 @@ import {
   type GearCategory,
 } from "@/lib/deals";
 
-type Tab = "Electric Dirt Bikes" | "E-Bikes" | "Gear";
+type Tab = "Electric Dirt Bikes" | "Gas Dirt Bikes" | "E-Bikes" | "Gear";
 type Sort = "best" | "priceLow" | "priceHigh" | "newest";
 
 function pctOff(d: Deal) {
@@ -25,7 +25,9 @@ function sortDeals(deals: Deal[], sort: Sort) {
   if (sort === "priceLow") return copy.sort((a, b) => a.price - b.price);
   if (sort === "priceHigh") return copy.sort((a, b) => b.price - a.price);
   if (sort === "newest") {
-    return copy.sort((a, b) => +new Date(b.lastUpdatedISO) - +new Date(a.lastUpdatedISO));
+    return copy.sort(
+      (a, b) => +new Date(b.lastUpdatedISO) - +new Date(a.lastUpdatedISO)
+    );
   }
   // "best" (fallback)
   return copy.sort((a, b) => {
@@ -77,10 +79,20 @@ export default function HomePage() {
   const [driveType, setDriveType] = useState<DriveType | "All">("All");
   const [gearCategory, setGearCategory] = useState<GearCategory | "All">("All");
 
+  const showDriveType = tab === "Electric Dirt Bikes" || tab === "E-Bikes";
+  const showGearCategory = tab === "Gear";
+
   const base = useMemo(() => {
     const q = query.trim().toLowerCase();
+
     const kind: DealKind =
-      tab === "Electric Dirt Bikes" ? "Bike" : tab === "E-Bikes" ? "Ebike" : "Gear";
+      tab === "Electric Dirt Bikes"
+        ? "Bike"
+        : tab === "Gas Dirt Bikes"
+        ? "GasBike"
+        : tab === "E-Bikes"
+        ? "Ebike"
+        : "Gear";
 
     let deals = SAMPLE_DEALS.filter((d) => d.region === region && d.kind === kind);
 
@@ -93,16 +105,18 @@ export default function HomePage() {
       });
     }
 
-    if (kind !== "Gear" && driveType !== "All") {
+    // Drive Type filter only applies to Electric Dirt Bikes + E-Bikes
+    if (showDriveType && driveType !== "All") {
       deals = deals.filter((d) => (d.driveType ?? "Unknown") === driveType);
     }
 
-    if (kind === "Gear" && gearCategory !== "All") {
+    // Gear Category filter only applies to Gear
+    if (showGearCategory && gearCategory !== "All") {
       deals = deals.filter((d) => d.gearCategory === gearCategory);
     }
 
     return sortDeals(deals, sort);
-  }, [tab, region, query, sort, driveType, gearCategory]);
+  }, [tab, region, query, sort, driveType, gearCategory, showDriveType, showGearCategory]);
 
   const budget = base.filter((d) => d.tier === "Budget");
   const mid = base.filter((d) => d.tier === "Mid");
@@ -126,7 +140,7 @@ export default function HomePage() {
           </h1>
 
           <p className="mt-4 text-lg text-white/75">
-            Curated deals on <b>electric dirt bikes</b>, <b>e-bikes</b>, and essential riding gear —
+            Curated deals on <b>electric dirt bikes</b>, <b>gas dirt bikes</b>, <b>e-bikes</b>, and essential riding gear —
             picked the same way I review bikes on the channel.
           </p>
 
@@ -154,10 +168,16 @@ export default function HomePage() {
 
         {/* Tabs */}
         <div className="relative mt-8 flex flex-wrap gap-2">
-          {(["Electric Dirt Bikes", "E-Bikes", "Gear"] as Tab[]).map((t) => (
+          {(["Electric Dirt Bikes", "Gas Dirt Bikes", "E-Bikes", "Gear"] as Tab[]).map((t) => (
             <button
               key={t}
-              onClick={() => setTab(t)}
+              onClick={() => {
+                setTab(t);
+                // reset per-tab filters so you don’t get "empty results" confusion
+                if (t === "Gear") setDriveType("All");
+                if (t !== "Gear") setGearCategory("All");
+                if (t === "Gas Dirt Bikes") setDriveType("All");
+              }}
               className={
                 "rounded-xl border px-4 py-2 text-sm font-semibold transition " +
                 (tab === t
@@ -188,13 +208,13 @@ export default function HomePage() {
           </select>
         </div>
 
-        <div className={tab === "Gear" ? "hidden md:block" : ""}>
+        <div className={!showDriveType ? "hidden md:block" : ""}>
           <label className="text-sm font-medium text-white/80">Drive Type</label>
           <select
             className="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-white"
             value={driveType}
             onChange={(e) => setDriveType(e.target.value as any)}
-            disabled={tab === "Gear"}
+            disabled={!showDriveType}
           >
             <option value="All">All</option>
             <option value="Mid-Drive">Mid-Drive</option>
@@ -203,13 +223,13 @@ export default function HomePage() {
           </select>
         </div>
 
-        <div className={tab !== "Gear" ? "hidden md:block" : ""}>
+        <div className={!showGearCategory ? "hidden md:block" : ""}>
           <label className="text-sm font-medium text-white/80">Gear Category</label>
           <select
             className="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-white"
             value={gearCategory}
             onChange={(e) => setGearCategory(e.target.value as any)}
-            disabled={tab !== "Gear"}
+            disabled={!showGearCategory}
           >
             <option value="All">All</option>
             <option value="Helmet">Helmet</option>
@@ -242,7 +262,13 @@ export default function HomePage() {
           <label className="text-sm font-medium text-white/80">Search</label>
           <input
             className="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-white"
-            placeholder={tab === "Gear" ? "Try: boots, helmet, gloves…" : "Try: mid-drive, hub, brand…"}
+            placeholder={
+              tab === "Gear"
+                ? "Try: boots, helmet, gloves…"
+                : tab === "Gas Dirt Bikes"
+                ? "Try: 110cc, 250cc, brand…"
+                : "Try: mid-drive, hub, brand…"
+            }
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
@@ -262,6 +288,8 @@ export default function HomePage() {
             title={
               tab === "Electric Dirt Bikes"
                 ? "Budget-Friendly Electric Dirt Bikes"
+                : tab === "Gas Dirt Bikes"
+                ? "Budget-Friendly Gas Dirt Bikes"
                 : tab === "E-Bikes"
                 ? "Budget-Friendly E-Bikes"
                 : "Budget Gear Deals"
@@ -269,6 +297,8 @@ export default function HomePage() {
             subtitle={
               tab === "Electric Dirt Bikes"
                 ? "Cheaper entry options + mini e-motos."
+                : tab === "Gas Dirt Bikes"
+                ? "Beginner-friendly gas bikes and value picks."
                 : tab === "E-Bikes"
                 ? "Often hub-motor value buys."
                 : "Affordable essentials (sales + closeouts)."
@@ -288,3 +318,4 @@ export default function HomePage() {
     </div>
   );
 }
+
