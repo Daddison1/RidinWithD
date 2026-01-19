@@ -1,6 +1,6 @@
 export type Region = "US" | "CA" | "UK" | "DE" | "AU" | "IN";
 
-export type DealKind = "Bike" | "Ebike" | "Gear";
+export type DealKind = "Bike" | "GasBike" | "Ebike" | "Gear";
 export type DriveType = "Mid-Drive" | "Hub Motor" | "Unknown";
 export type PriceTier = "Budget" | "Mid" | "Premium";
 
@@ -38,8 +38,9 @@ type BaseDeal = {
    DISCRIMINATED UNION TYPES (safer)
 ===================================================== */
 export type BikeDeal = BaseDeal & {
-  kind: "Bike" | "Ebike";
-  driveType: DriveType;
+  kind: "Bike" | "GasBike" | "Ebike";
+  // Gas bikes don't need a driveType, so make it optional
+  driveType?: DriveType;
   gearCategory?: never;
 };
 
@@ -72,9 +73,8 @@ const nowISO = () => new Date().toISOString();
 
 export const SAMPLE_DEALS: Deal[] = [
   // =====================================================
-  // KIDS / MINI
+  // KIDS / MINI (ELECTRIC)
   // =====================================================
-
   {
     id: "bike-razor-mx350",
     title: "Razor MX350 Dirt Rocket",
@@ -126,119 +126,164 @@ export const SAMPLE_DEALS: Deal[] = [
     lastUpdatedISO: nowISO(),
   },
 
- // ==========================
-// MID-RANGE (fix images)
-// ==========================
+  // =====================================================
+  // MID-RANGE (ELECTRIC)
+  // =====================================================
+  {
+    id: "bike-tuttio-soleil01",
+    title: "Tuttio Soleil01 Electric Dirt Bike",
+    brand: "Tuttio",
+    retailer: "TuttioSport",
+    region: "US",
+    kind: "Bike",
+    driveType: "Unknown",
+    price: 1299,
+    wasPrice: 1399,
+    tier: "Mid",
+    url: "https://tuttiosport.com/products/tuttio-soleil01-electric-bike",
+    imageUrl:
+      "https://tuttiosport.com/cdn/shop/files/tuttio-soleil01.png?v=1746531602&width=1200",
+    highlights: ["Pit-bike style", "Good value", "Mid-range power"],
+    lastUpdatedISO: nowISO(),
+  },
 
-{
-  id: "bike-tuttio-soleil01",
-  title: "Tuttio Soleil01 Electric Dirt Bike",
-  brand: "Tuttio",
-  retailer: "TuttioSport",
-  region: "US",
-  kind: "Bike",
-  driveType: "Unknown",
-  price: 1299,
-  wasPrice: 1399,
-  tier: "Mid",
-  url: "https://tuttiosport.com/products/tuttio-soleil01-electric-bike",
-  imageUrl:
-    "https://tuttiosport.com/cdn/shop/files/tuttio-soleil01.png?v=1746531602&width=1200",
-  highlights: ["Pit-bike style", "Good value", "Mid-range power"],
-  lastUpdatedISO: nowISO(),
-},
+  {
+    id: "bike-yozma-in10",
+    title: "Yozma IN-10 Electric Dirt Bike",
+    brand: "Yozma",
+    retailer: "Yozma Sport",
+    region: "US",
+    kind: "Bike",
+    driveType: "Mid-Drive",
+    price: 1259,
+    wasPrice: 1599,
+    tier: "Mid",
+    url: "https://yozmasport.com/products/in-10",
+    imageUrl:
+      "https://yozmasport.com/cdn/shop/files/Group_41_94ff018a-cd32-475e-a02a-0af0b18cfd24.png?v=1765267218&width=1200",
+    highlights: ["Teen / adult capable", "Strong mid-range value", "Aggressive styling"],
+    lastUpdatedISO: nowISO(),
+  },
 
-{
-  id: "bike-yozma-in10",
-  title: "Yozma IN-10 Electric Dirt Bike",
-  brand: "Yozma",
-  retailer: "Yozma Sport",
-  region: "US",
-  kind: "Bike",
-  driveType: "Mid-Drive",
-  price: 1259,
-  wasPrice: 1599,
-  tier: "Mid",
-  url: "https://yozmasport.com/products/in-10",
-  imageUrl:
-    "https://yozmasport.com/cdn/shop/files/Group_41_94ff018a-cd32-475e-a02a-0af0b18cfd24.png?v=1765267218&width=1200",
-  highlights: ["Teen / adult capable", "Strong mid-range value", "Aggressive styling"],
-  lastUpdatedISO: nowISO(),
-},
+  {
+    id: "bike-qronge-x1-spark",
+    title: "Qronge X1 Spark",
+    brand: "Qronge",
+    retailer: "Qronge",
+    region: "US",
+    kind: "Bike",
+    driveType: "Mid-Drive",
+    price: 1149,
+    wasPrice: 2199,
+    tier: "Mid",
+    url: "https://www.qronge.com/products/x1-spark",
+    imageUrl:
+      "https://www.qronge.com/cdn/shop/files/2025-12-26-Q_M_3.png?v=1767173964&width=1200",
+    highlights: ["High claimed wattage", "Popular review bike", "Great sale value"],
+    lastUpdatedISO: nowISO(),
+  },
 
+  // =====================================================
+  // TOP TIER (ELECTRIC)
+  // =====================================================
+  {
+    id: "bike-eride-pro-s",
+    title: "E Ride Pro S",
+    brand: "E Ride Pro",
+    retailer: "E Ride Pro",
+    region: "US",
+    kind: "Bike",
+    driveType: "Mid-Drive",
+    price: 3999,
+    tier: "Premium",
+    url: "https://www.eridepro.com/products/pro-s",
+    imageUrl: "https://www.eridepro.com/cdn/shop/files/S16-1_1200x.jpg?v=1766548419",
+    highlights: ["High-performance e-moto", "Top-tier platform", "Upgrade friendly"],
+    lastUpdatedISO: nowISO(),
+  },
 
-{
-  id: "bike-qronge-x1-spark",
-  title: "Qronge X1 Spark",
-  brand: "Qronge",
-  retailer: "Qronge",
-  region: "US",
-  kind: "Bike",
-  driveType: "Mid-Drive",
-  price: 1149,
-  wasPrice: 2199,
-  tier: "Mid",
-  url: "https://www.qronge.com/products/x1-spark",
-  imageUrl:
-    "https://www.qronge.com/cdn/shop/files/2025-12-26-Q_M_3.png?v=1767173964&width=1200",
-  highlights: ["High claimed wattage", "Popular review bike", "Great sale value"],
-  lastUpdatedISO: nowISO(),
-},
+  {
+    id: "bike-eride-pro-sr",
+    title: "E Ride Pro SR",
+    brand: "E Ride Pro",
+    retailer: "E Ride Pro",
+    region: "US",
+    kind: "Bike",
+    driveType: "Mid-Drive",
+    price: 5699,
+    tier: "Premium",
+    url: "https://www.eridepro.com/products/pro-sr",
+    imageUrl:
+      "https://www.eridepro.com/cdn/shop/files/removed_bg_sr_5e15d193-69fe-4749-bf32-47ce66002c04_1200x.png?v=1760463738",
+    highlights: ["Higher spec version", "More range & power", "Premium class"],
+    lastUpdatedISO: nowISO(),
+  },
 
-// ==========================
-// TOP TIER (fix images)
-// ==========================
+  {
+    id: "bike-surron-ultra-bee",
+    title: "Sur-Ron Ultra Bee",
+    brand: "Sur-Ron",
+    retailer: "Sur-Ron / Dealers",
+    region: "US",
+    kind: "Bike",
+    driveType: "Mid-Drive",
+    price: 5200,
+    tier: "Premium",
+    url: "https://sur-ronusa.us.com/product/surron-ultra-bee/",
+    imageUrl:
+      "https://sur-ronusa.us.com/wp-content/uploads/2025/01/sur-ron-ultra-bee-700x467.jpg",
+    highlights: ["Full-size e-moto", "Enduro capable", "Elite performance"],
+    lastUpdatedISO: nowISO(),
+  },
 
-{
-  id: "bike-eride-pro-s",
-  title: "E Ride Pro S",
-  brand: "E Ride Pro",
-  retailer: "E Ride Pro",
-  region: "US",
-  kind: "Bike",
-  driveType: "Mid-Drive",
-  price: 3999,
-  tier: "Premium",
-  url: "https://www.eridepro.com/products/pro-s",
-  imageUrl:
-    "https://www.eridepro.com/cdn/shop/files/S16-1_1200x.jpg?v=1766548419",
-  highlights: ["High-performance e-moto", "Top-tier platform", "Upgrade friendly"],
-  lastUpdatedISO: nowISO(),
-},
+  // =====================================================
+  // GAS DIRT BIKES (NEW CATEGORY)
+  // Using PLACEHOLDER images to avoid hotlink blocks.
+  // =====================================================
+  {
+    id: "gas-yamaha-ttr110",
+    title: "Yamaha TT-R110",
+    brand: "Yamaha",
+    retailer: "Dealers",
+    region: "US",
+    kind: "GasBike",
+    price: 0,
+    tier: "Budget",
+    url: "https://www.yamahamotorsports.com/",
+    imageUrl: PLACEHOLDER,
+    highlights: ["Beginner friendly", "Great starter gas bike", "Easy to maintain"],
+    lastUpdatedISO: nowISO(),
+  },
 
-{
-  id: "bike-eride-pro-sr",
-  title: "E Ride Pro SR",
-  brand: "E Ride Pro",
-  retailer: "E Ride Pro",
-  region: "US",
-  kind: "Bike",
-  driveType: "Mid-Drive",
-  price: 5699,
-  tier: "Premium",
-  url: "https://www.eridepro.com/products/pro-sr",
-  imageUrl:
-    "https://www.eridepro.com/cdn/shop/files/removed_bg_sr_5e15d193-69fe-4749-bf32-47ce66002c04_1200x.png?v=1760463738",
-  highlights: ["Higher spec version", "More range & power", "Premium class"],
-  lastUpdatedISO: nowISO(),
-},
+  {
+    id: "gas-honda-crf125f",
+    title: "Honda CRF125F",
+    brand: "Honda",
+    retailer: "Dealers",
+    region: "US",
+    kind: "GasBike",
+    price: 0,
+    tier: "Mid",
+    url: "https://powersports.honda.com/",
+    imageUrl: PLACEHOLDER,
+    highlights: ["Reliable trail bike", "Smooth power", "Great resale"],
+    lastUpdatedISO: nowISO(),
+  },
 
-{
-  id: "bike-surron-ultra-bee",
-  title: "Sur-Ron Ultra Bee",
-  brand: "Sur-Ron",
-  retailer: "Sur-Ron / Dealers",
-  region: "US",
-  kind: "Bike",
-  driveType: "Mid-Drive",
-  price: 5200,
-  tier: "Premium",
-  url: "https://sur-ronusa.us.com/product/surron-ultra-bee/",
-  imageUrl:
-    "https://sur-ronusa.us.com/wp-content/uploads/2025/01/sur-ron-ultra-bee-700x467.jpg",
-  highlights: ["Full-size e-moto", "Enduro capable", "Elite performance"],
-  lastUpdatedISO: nowISO(),
-
-},
+  {
+    id: "gas-ktm-250sxf",
+    title: "KTM 250 SX-F",
+    brand: "KTM",
+    retailer: "Dealers",
+    region: "US",
+    kind: "GasBike",
+    price: 0,
+    tier: "Premium",
+    url: "https://www.ktm.com/",
+    imageUrl: PLACEHOLDER,
+    highlights: ["Race-ready", "High performance", "Premium build"],
+    lastUpdatedISO: nowISO(),
+  },
 ];
+
 
